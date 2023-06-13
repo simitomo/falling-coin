@@ -4,53 +4,68 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    /// ƒ}ƒEƒX‚ğ‰Ÿ‚µ‚½’n“_‚©‚ç—£‚µ‚½’n“_‚Ü‚Å‚ÌÀ•W‚ÌŒvZ
-    private Vector2 AddPos(Vector2 startPos, Vector2 endPos)
+    /// ãƒã‚¦ã‚¹ã‚’æŠ¼ã—ãŸåœ°ç‚¹ã‹ã‚‰é›¢ã—ãŸåœ°ç‚¹ã¾ã§ã®åº§æ¨™ã‚’è¨ˆç®—ã—ã¦è¿”ã™
+    private Vector2 SubPos(Vector2 startPos, Vector2 endPos)
     {
         Vector2 temp;
-        temp.x = startPos.x + endPos.y;
-        temp.y = startPos.y + endPos.y;
+        // ãã‚Œãã‚Œã®è»¸ã«åŠ ãˆã‚‹åŠ›ã‚’èª¿ç¯€ã™ã‚‹
+        temp.x = (startPos.x - endPos.x) / 2;
+        temp.y = (startPos.y - endPos.y) * 2;
         return temp;
     }
 
-    // ƒ}ƒEƒX‚ğ‰Ÿ‚µ‚½À•W‚ğ“ü‚ê‚é•Ï”
+    // ãƒã‚¦ã‚¹ã‚’æŠ¼ã—ãŸåœ°ç‚¹ã®åº§æ¨™ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
     Vector2 startPos = new Vector2();
 
-    // Rigidbody2DŒ^‚Ì•Ï”‚ğ—pˆÓ
+    // å¼·ã‚ã«é‡åŠ›ã‚’ã‹ã‘ã‚‹ãŸã‚ã®å¤‰æ•°
+    Vector2 gravity = new Vector2(0, -19.6f);
+
+    // ã‚¸ãƒ£ãƒ³ãƒ—ã‚’ã™ã‚‹ãŸã‚ã®é–¢æ•°
+    Vector2 jumpForce = new Vector2(0, 500f);
+
+    // Rigidbody2Dã‚’å…¥ã‚Œã‚‹ç”¨ã®å¤‰æ•°
     Rigidbody2D rigid;
 
     void Start()
     {
-        // rigidbody‚ğˆµ‚¦‚é‚æ‚¤‚É‹@”\‚ğ‚Á‚Ä‚­‚é
+        // Rigidbody2Dã®æ©Ÿèƒ½ã‚’ä½¿ãˆã‚‹ã‚ˆã†ã«å‚ç…§ã™ã‚‹
         rigid = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // ƒ}ƒEƒX‚ª‰Ÿ‚³‚ê‚½’n“_‚ÌÀ•W‚ğ‘ã“ü
+        // ãƒã‚¦ã‚¹ãŒæŠ¼ã•ã‚ŒãŸåœ°ç‚¹ã‚’ä»£å…¥
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("U_OK");
             startPos = Input.mousePosition;
         }
 
-        // ƒ}ƒEƒX‚ª—£‚³‚ê‚½À•W‚ğ‘ã“ü
-        // ˆø‚Á’£‚Á‚½—Ê‚¾‚¯—Í‚ğ‰Á‚¦‚é
+        // ãƒã‚¦ã‚¹ãŒé›¢ã•ã‚ŒãŸåœ°ç‚¹ã‚’ä»£å…¥ã—æŠ¼ã—ãŸåœ°ç‚¹ã‹ã‚‰ã®åº§æ¨™ã‚’æ±‚ã‚ã‚‹
+        // æ±‚ã‚ãŸåº§æ¨™åˆ†ã ã‘åŠ›ã‚’åŠ ãˆã‚‹
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2 addPos = AddPos(startPos, Input.mousePosition);
+            // subPosã«ãƒã‚¦ã‚¹ã‚’æŠ¼ã—ãŸåœ°ç‚¹ã‹ã‚‰é›¢ã—ãŸåœ°ç‚¹ã‚’å¼•ã„ãŸåº§æ¨™ã‚’å…¥ã‚Œã‚‹
+            Vector2 subPos = SubPos(startPos, Input.mousePosition);
 
-            this.rigid.AddForce(addPos);
+            // æ¨ªè»¸ã®ã‚¹ãƒ”ãƒ¼ãƒ‰ãŒä»¥ä¸‹ã®ç¯„å›²å†…ã®å ´åˆè¿½åŠ ã§åŠ›ã‚’åŠ ãˆã‚‹ã“ã¨ãŒã§ãã‚‹
+            if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
+            {
+                this.rigid.AddForce(subPos);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
+        {
+            this.rigid.AddForce(jumpForce);
         }
     }
 
     void FixedUpdate()
     {
-        // ’n–Ê‚É‚Â‚¢‚Ä‚¢‚È‚¢ê‡d—Í‚ğ’Êí‚Ì2”{‚©‚¯‚é
+        // ç¸¦è»¸ã®ã‚¹ãƒ”ãƒ¼ãƒ‰ãŒ0ã˜ã‚ƒãªã„ã¨ãé‡åŠ›ã‚’å¼·ã‚ã«ã‹ã‘ã‚‹
         if (this.rigid.velocity.y != 0)
         {
-            Debug.Log("FU_OK");
-            this.rigid.AddForce(transform.up * -19.6f);
+            this.rigid.AddForce(gravity);
         }
     }
 }
