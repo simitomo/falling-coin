@@ -23,12 +23,15 @@ public class PlayerController : MonoBehaviour
     // ジャンプをするための関数
     Vector2 jumpForce = new Vector2(0, 500f);
 
-    // Rigidbody2Dを入れる用の変数
-    Rigidbody2D rigid;
+    // タグ検索用で"enemy"という名前で変数を用意
+    const string enemyTag = "enemy";
 
+    // AddForceを使う用の変数
+    Rigidbody2D rigid;
+        
     void Start()
     {
-        // Rigidbody2Dの機能を使えるように参照する
+        // Rigidbody2Dの機能(AddForce)を使えるように参照する
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // 縦軸に動いていない場合かつスペースキーが押された場合ジャンプする
         if (Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
         {
             this.rigid.AddForce(jumpForce);
@@ -66,6 +70,21 @@ public class PlayerController : MonoBehaviour
         if (this.rigid.velocity.y != 0)
         {
             this.rigid.AddForce(gravity);
+        }
+    }
+
+    // 敵に触れた場合動作する
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // "enemy"というタグがつけられたオブジェクトのみ動作するようにする
+        if (collision.gameObject.CompareTag(enemyTag))
+        {
+            Debug.Log("HIT");
+            // 縦軸の速度はそのままで横軸のスピードを1/10にする
+            this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y);
+
+            // 触れた敵を消す
+            Destroy(collision.gameObject);
         }
     }
 }
