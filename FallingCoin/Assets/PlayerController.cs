@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
         return temp;
     }
 
+    // タグ検索用で定数を用意
+    const string kEnemyTag = "enemy";
+
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
 
@@ -23,13 +26,17 @@ public class PlayerController : MonoBehaviour
     // ジャンプをするための関数
     Vector2 jumpForce = new Vector2(0, 500f);
 
-    // Rigidbody2Dを入れる用の変数
+    // AddForceを使う用の変数
     Rigidbody2D rigid;
+    // バフを使う用の変数
+    PlayerBuff buff;
 
     void Start()
     {
-        // Rigidbody2Dの機能を使えるように参照する
-        rigid = GetComponent<Rigidbody2D>();
+        // Rigidbody2Dの機能(AddForce)を使えるように参照する
+        this.rigid = GetComponent<Rigidbody2D>();
+        // PlayerBuffのスクリプトを参照できるようにする
+        buff = GetComponent<PlayerBuff>();
     }
 
     void Update()
@@ -47,13 +54,17 @@ public class PlayerController : MonoBehaviour
             // subPosにマウスを押した地点から離した地点を引いた座標を入れる
             Vector2 subPos = SubPos(startPos, Input.mousePosition);
 
-            // 横軸のスピードが以下の範囲内の場合追加で力を加えることができる
+            // 以下のスピード以内の時動作する
             if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
             {
+                subPos = buff.PlayerpeedUp(subPos);
+                // 引っ張った距離だけ力を加える
                 this.rigid.AddForce(subPos);
             }
+
         }
 
+        // 縦軸に動いていない場合かつスペースキーが押された場合ジャンプする
         if (Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
         {
             this.rigid.AddForce(jumpForce);
@@ -66,6 +77,23 @@ public class PlayerController : MonoBehaviour
         if (this.rigid.velocity.y != 0)
         {
             this.rigid.AddForce(gravity);
+        }
+    }
+
+    // 敵に触れた場合動作する
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // "enemy"というタグがつけられたオブジェクトのみ動作するようにする
+        if (collision.gameObject.CompareTag(kEnemyTag))
+        {
+            // プレイヤーに無敵がついていない場合　　縦軸の速度はそのままで横軸のスピードを1/10にする
+            if (buff.isPlayerInvincible())
+            {
+                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y);
+            }
+
+            // 触れた敵を消す
+            Destroy(collision.gameObject);
         }
     }
 }
