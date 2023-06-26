@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // タグ検索用で定数を用意
-    const string ENEMY_TAG = "enemy";
+    const string kEnemyTag = "enemy";
 
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
@@ -84,10 +84,13 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         // "enemy"というタグがつけられたオブジェクトのみ動作するようにする
-        if (collision.gameObject.CompareTag(ENEMY_TAG))
+        if (collision.gameObject.CompareTag(kEnemyTag))
         {
-            // 縦軸の速度はそのままで横軸のスピードを1/10にする
-            this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y);
+            // プレイヤーに無敵がついていない場合　　縦軸の速度はそのままで横軸のスピードを1/10にする
+            if (buff.isPlayerInvincible())
+            {
+                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y);
+            }
 
             // 触れた敵を消す
             Destroy(collision.gameObject);
