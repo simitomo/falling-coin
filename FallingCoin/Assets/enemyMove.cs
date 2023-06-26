@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class enemyMove : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     private Vector2 initialPosition;
 
@@ -10,7 +10,7 @@ public class enemyMove : MonoBehaviour
         initialPosition = transform.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = new Vector2(initialPosition.x,Mathf.Sin(Time.time)*10.0f+initialPosition.y);
     }
