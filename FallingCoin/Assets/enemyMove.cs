@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class enemyMove : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     private Vector2 initialPosition;
 
