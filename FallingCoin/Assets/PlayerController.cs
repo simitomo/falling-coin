@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     /// マウスを押した地点から離した地点までの座標を計算して返す
-    private Vector2 SubPos(Vector2 startPos, Vector2 endPos)
+    private Vector2 PlayerPos(Vector2 startPos, Vector2 endPos)
     {
         Vector2 temp;
         // それぞれの軸に加える力を調節する
@@ -52,14 +52,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             // subPosにマウスを押した地点から離した地点を引いた座標を入れる
-            Vector2 subPos = SubPos(startPos, Input.mousePosition);
+            Vector2 playerPos = PlayerPos(startPos, Input.mousePosition);
 
             // 以下のスピード以内の時動作する
             if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
             {
-                subPos = buff.PlayerpeedUp(subPos);
+                playerPos = buff.PlayerSpeedup(playerPos);
                 // 引っ張った距離だけ力を加える
-                this.rigid.AddForce(subPos);
+                this.rigid.AddForce(playerPos);
             }
 
         }
