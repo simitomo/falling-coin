@@ -12,6 +12,6 @@ public class EnemyMove : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector2(initialPosition.x,Mathf.Sin(Time.time)*10.0f+initialPosition.y);
+        transform.position = new Vector2(initialPosition.x,Mathf.Sin(Time.time)*5.0f+initialPosition.y);
     }
 }

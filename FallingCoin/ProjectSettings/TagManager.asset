@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemy
-  - enemyKill
   - speedup
+  - invincible
   layers:
   - Default
   - TransparentFX

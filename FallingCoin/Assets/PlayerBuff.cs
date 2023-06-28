@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerBuff : MonoBehaviour
 {
     public Vector2 PlayerSpeedup(Vector2 pos)
     {
         Vector2 temp = pos;
+
         if (speedupTurn > 0)
         {
             temp.x *= kSpeedupPower;
             speedupTurn--;
         }
+
         return temp;
     }
 
