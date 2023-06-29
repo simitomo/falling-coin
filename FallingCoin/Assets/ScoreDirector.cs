@@ -14,7 +14,7 @@ public class ScoreDirector : MonoBehaviour
     TextMeshProUGUI textScore;
 
     // アイテムをとって上がるスコアの得点
-    const int kScorePoint = 10;
+    const int kScorePoint = 1000;
 
     // スコア用の変数
     int score;
@@ -31,6 +31,11 @@ public class ScoreDirector : MonoBehaviour
     void FixedUpdate()
     {
         // テキストを変更して表示させる
-        this.textScore.SetText("Score : " + score);
+        this.textScore.SetText("{0}", score);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            score += 100;
+        }
     }
 }

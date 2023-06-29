@@ -56,23 +56,18 @@ public class PlayerController : MonoBehaviour
         // 求めた座標分だけ力を加える
         if (Input.GetMouseButtonUp(0))
         {
-            // subPosにマウスを押した地点から離した地点を引いた座標を入れる
+            // playerPosにマウスを押した地点から離した地点を引いた座標を入れる
             Vector2 playerPos = PlayerPos(startPos, Input.mousePosition);
-
-            // 以下のスピード以内の時動作する
-            if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
-            {
-                playerPos = buff.PlayerSpeedup(playerPos);
-                // 引っ張った距離だけ力を加える
-                this.rigid.AddForce(playerPos);
-            }
-
+            // 速度アップ処理
+            playerPos = buff.PlayerSpeedup(playerPos);
+            // 引っ張った距離だけ力を加える
+            this.rigid.AddForce(playerPos);
         }
 
-        // 縦軸に動いていない場合かつスペースキーが押された場合ジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
+        // スペースキーが押された場合にX軸方向のスピードを反転する
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            this.rigid.AddForce(jumpForce);
+            this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
         }
     }
 
