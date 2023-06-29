@@ -12,7 +12,7 @@ public class PlayerBuff : MonoBehaviour
         if (speedupTurn > 0)
         {
             temp.x *= kSpeedupPower;
-            speedupTurn--;
+            //speedupTurn--;
         }
 
         return temp;
@@ -38,7 +38,7 @@ public class PlayerBuff : MonoBehaviour
     const int kSpeedupTurnMax = 3;
 
     // buffでスピードアップする力
-    const float kSpeedupPower = 5;
+    const float kSpeedupPower = 3;
 
     // 使用可能ターン用変数
     int speedupTurn;

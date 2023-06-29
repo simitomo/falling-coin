@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector2 startPos = new Vector2();
 
     // 強めに重力をかけるための変数
-    Vector2 gravity = new Vector2(0, -19.6f);
+    Vector2 gravity = new Vector2(0, -9.8f * 4);
 
     // ジャンプをするための関数
     Vector2 jumpForce = new Vector2(0, 500f);
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             Vector2 playerPos = PlayerPos(startPos, Input.mousePosition);
 
             // 以下のスピード以内の時動作する
-            if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
+            //if (-10 < this.rigid.velocity.x && this.rigid.velocity.x < 10)
             {
                 playerPos = buff.PlayerSpeedup(playerPos);
                 // 引っ張った距離だけ力を加える
@@ -65,9 +65,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // 縦軸に動いていない場合かつスペースキーが押された場合ジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
+        if (Input.GetKeyDown(KeyCode.Space))//(Input.GetKeyDown(KeyCode.Space) && this.rigid.velocity.y == 0)
         {
-            this.rigid.AddForce(jumpForce);
+            //this.rigid.AddForce(jumpForce);
+            this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
         }
     }
 
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
         // 縦軸のスピードが0じゃないとき重力を強めにかける
         if (this.rigid.velocity.y != 0)
         {
+            Debug.Log("落下");
             this.rigid.AddForce(gravity);
         }
     }
