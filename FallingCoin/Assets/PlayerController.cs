@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 temp;
         // それぞれの軸に加える力を調節する
-        temp.x = (startPos.x - endPos.x) / 2;
+        temp.x = (startPos.x - endPos.x) / 1;
         temp.y = (startPos.y - endPos.y) * 2;
         return temp;
     }
@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
         {
             //this.rigid.AddForce(jumpForce);
             this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            this.rigid.velocity = new Vector2();
         }
     }
 

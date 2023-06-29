@@ -12,7 +12,7 @@ public class PlayerBuff : MonoBehaviour
         if (speedupTurn > 0)
         {
             temp.x *= kSpeedupPower;
-            //speedupTurn--;
+            speedupTurn--;
         }
 
         return temp;
