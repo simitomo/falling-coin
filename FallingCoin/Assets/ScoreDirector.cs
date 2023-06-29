@@ -5,30 +5,32 @@ using TMPro;    // TextMeshProを使えるようにする
 
 public class ScoreDirector : MonoBehaviour
 {
+    public void ScoreUp()
+    {
+        score += kScorePoint;
+    }
+
     // TextMeshProを使う用の変数
     TextMeshProUGUI textScore;
+
+    // アイテムをとって上がるスコアの得点
+    const int kScorePoint = 10;
 
     // スコア用の変数
     int score;
 
     void Start()
     {
-        this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
         // TextMeshProを得る
+        this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
+
+        // スコアの初期化
         this.score = 0;
     }
 
     void FixedUpdate()
     {
         // テキストを変更して表示させる
-        this.textScore.text("Score : {0}", score);
-    }
-
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            score++;
-        }
+        this.textScore.SetText("Score : " + score);
     }
 }

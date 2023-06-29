@@ -4,26 +4,38 @@ using UnityEngine;
 
 public class PlayerBuff : MonoBehaviour
 {
+    // プレイヤーの速度をアップ
     public Vector2 PlayerSpeedup(Vector2 pos)
     {
         Vector2 temp = pos;
+
+        // スピードアップアイテムターンであれば
         if (speedupTurn > 0)
         {
+            // 速度アップ
             temp.x *= kSpeedupPower;
+
+            // ターンを減らす
             speedupTurn--;
         }
+
         return temp;
     }
 
+    // 敵の攻撃を受けるか
     public bool isPlayerInvincible()
     {
         // 無敵がついている場合
         if (invincibleUseNum > 0)
         {
+            // ターンを減らす
             invincibleUseNum--;
+
+            // 受けないとして返す
             return false;
         }
 
+        // 受けるとして返す
         return true;
     }
 

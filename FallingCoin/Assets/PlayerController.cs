@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     // タグ検索用で定数を用意
     const string kEnemyTag = "enemy";
+    const string kScoreTag = "score";
 
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigid;
     // バフを使う用の変数
     PlayerBuff buff;
+    // スコアアップ用の変数
+    ScoreDirector score;
 
     void Start()
     {
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
         this.rigid = GetComponent<Rigidbody2D>();
         // PlayerBuffのスクリプトを参照できるようにする
         buff = GetComponent<PlayerBuff>();
+        // ScoreDirectorのスクリプトを参照できるようにする
+        score = GameObject.Find("Director").GetComponent<ScoreDirector>();
     }
 
     void Update()
@@ -93,6 +98,15 @@ public class PlayerController : MonoBehaviour
             }
 
             // 触れた敵を消す
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag(kScoreTag))
+        {
+            // スコアをアップする
+            score.ScoreUp();
+
+            // 触れたアイテムを消す
             Destroy(collision.gameObject);
         }
     }
