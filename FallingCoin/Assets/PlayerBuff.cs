@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBuff : MonoBehaviour
 {
-    public Vector2 PlayerpeedUp(Vector2 pos)
+    public Vector2 PlayerSpeedup(Vector2 pos)
     {
         Vector2 temp = pos;
         if (speedupTurn > 0)
@@ -34,14 +34,16 @@ public class PlayerBuff : MonoBehaviour
     // スピードアップが適用するターン数
     const int kSpeedupTurnMax = 3;
 
-    // 無敵が適用される回数
-    const int kInvincibleUseNumMax = 3;
-
     // buffでスピードアップする力
     const float kSpeedupPower = 5;
 
     // 使用可能ターン用変数
     int speedupTurn;
+
+    // 無敵が適用される回数
+    const int kInvincibleUseNumMax = 3;
+
+    // 無敵が適用される回数用変数
     int invincibleUseNum;
 
     void Start()
