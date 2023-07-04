@@ -4,26 +4,38 @@ using UnityEngine;
 
 public class PlayerBuff : MonoBehaviour
 {
+    // プレイヤーの速度をアップ
     public Vector2 PlayerSpeedup(Vector2 pos)
     {
         Vector2 temp = pos;
+
+        // スピードアップアイテムターンであれば
         if (speedupTurn > 0)
         {
+            // 速度アップ
             temp.x *= kSpeedupPower;
+
+            // ターンを減らす
             speedupTurn--;
         }
+
         return temp;
     }
 
+    // 敵の攻撃を受けるか
     public bool isPlayerInvincible()
     {
         // 無敵がついている場合
         if (invincibleUseNum > 0)
         {
+            // ターンを減らす
             invincibleUseNum--;
+
+            // 受けないとして返す
             return false;
         }
 
+        // 受けるとして返す
         return true;
     }
 
@@ -53,7 +65,7 @@ public class PlayerBuff : MonoBehaviour
         invincibleUseNum = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // スピードアップアイテムを拾ったとき
         if (collision.gameObject.CompareTag(kSpeedupTag))
@@ -73,6 +85,24 @@ public class PlayerBuff : MonoBehaviour
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        // デバッグ用コード
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // スピードアップアイテムターン追加
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                speedupTurn = kSpeedupTurnMax;
+            }
+            // 無敵回数追加
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                invincibleUseNum = kInvincibleUseNumMax;
+            }
         }
     }
 }

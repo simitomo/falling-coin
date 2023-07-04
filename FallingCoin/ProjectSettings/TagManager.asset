@@ -7,6 +7,8 @@ TagManager:
   - enemy
   - enemyKill
   - speedup
+  - score
+  - invincible
   layers:
   - Default
   - TransparentFX
