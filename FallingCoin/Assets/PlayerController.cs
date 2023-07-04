@@ -69,6 +69,16 @@ public class PlayerController : MonoBehaviour
         {
             this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
         }
+
+        // デバック用コード
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // 速度0(停止)
+            if (Input.GetMouseButton(1))
+            {
+                this.rigid.velocity = Vector2.zero;
+            }
+        }
     }
 
     void FixedUpdate()

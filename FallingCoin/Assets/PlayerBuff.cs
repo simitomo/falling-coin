@@ -65,7 +65,7 @@ public class PlayerBuff : MonoBehaviour
         invincibleUseNum = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // スピードアップアイテムを拾ったとき
         if (collision.gameObject.CompareTag(kSpeedupTag))
@@ -85,6 +85,24 @@ public class PlayerBuff : MonoBehaviour
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        // デバッグ用コード
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // スピードアップアイテムターン追加
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                speedupTurn = kSpeedupTurnMax;
+            }
+            // 無敵回数追加
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                invincibleUseNum = kInvincibleUseNumMax;
+            }
         }
     }
 }

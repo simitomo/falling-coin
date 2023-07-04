@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;    // TextMeshProを使えるようにする
+using UnityEngine.SceneManagement;
 
 public class ScoreDirector : MonoBehaviour
 {
+    // スコアのアップ処理
     public void ScoreUp()
     {
         score += kScorePoint;
@@ -24,18 +26,37 @@ public class ScoreDirector : MonoBehaviour
         // TextMeshProを得る
         this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
 
-        // スコアの初期化
-        this.score = 0;
+        // スコアデータの獲得(Scoreというデータがない場合0を代入)
+        score = PlayerPrefs.GetInt("Score", 0);
     }
 
-    void FixedUpdate()
+    // オブジェクト終了時に動作
+    void OnDestroy()
     {
-        // テキストを変更して表示させる
+        // スコアの値をScoreというデータに保存
+        PlayerPrefs.SetInt("Score", score);
+    }
+
+    void Update()
+    {
+        // テキストを描画
         this.textScore.SetText("{0}", score);
 
-        if (Input.GetMouseButtonDown(0))
+        // デバック用コード
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            score += 100;
+            if (Input.GetKey(KeyCode.P))
+            {
+                score += 100;
+            }
+            if (Input.GetKey(KeyCode.O))
+            {
+                score = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                SceneManager.LoadScene("TashiroCreateScene2");
+            }
         }
     }
 }
