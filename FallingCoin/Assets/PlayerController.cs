@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
             this.rigid.AddForce(playerPos);
         }
 
-        // スペースキーが押された場合にX軸方向のスピードを反転する
-        if (Input.GetKeyDown(KeyCode.Space))
+        // 右クリックが押された場合にX軸方向のスピードを反転する
+        if (Input.GetMouseButtonDown(1))
         {
             this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
         }
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // 速度0(停止)
-            if (Input.GetMouseButton(1))
+            if (Input.GetKey(KeyCode.Space))
             {
                 this.rigid.velocity = Vector2.zero;
             }
