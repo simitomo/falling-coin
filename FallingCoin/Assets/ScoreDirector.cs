@@ -39,9 +39,6 @@ public class ScoreDirector : MonoBehaviour
 
     void Update()
     {
-        // テキストを描画
-        this.textScore.SetText("{0}", score);
-
         // デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -58,5 +55,8 @@ public class ScoreDirector : MonoBehaviour
                 SceneManager.LoadScene("TashiroCreateScene2");
             }
         }
+
+        // テキストを描画
+        this.textScore.SetText("{0}", score);
     }
 }
