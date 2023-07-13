@@ -105,4 +105,14 @@ public class PlayerBuff : MonoBehaviour
             }
         }
     }
+
+    // ほかのスクリプトでも変数を使えるように関数化する
+    public int GetSpeedupTurn()
+    {
+        return speedupTurn;
+    }
+    public int GetInvincibleTurn()
+    {
+        return invincibleUseNum;
+    }
 }
