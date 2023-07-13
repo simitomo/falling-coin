@@ -1,48 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArrowDirector : MonoBehaviour
 {
     // プレイヤーを入れる用の変数
     Transform player;
-    // スクリーン座標を入れる用の変数
-    Vector3 screenPos;
+    // 矢印の座標変更用の変数
+    RectTransform arrowTransform;
 
     // 矢印を入れる用の変数
     GameObject arrow;
-
     // 初めの回転角
     Quaternion startRotation;
-
     // クリックした時の位置
     Vector2 startPos;
 
-    // クリックした時の位置から上にY軸の成分を伸ばす用の変数
-    Vector2 vectorY;
-
     // クリックした地点から現在までの位置
     Vector2 endPos;
+    // クリックした時の位置から上にY軸の成分を伸ばす用の変数
+    Vector2 vectorY;
 
     // 角度
     float angle = 0f;
     // 外積用
     Vector3 outerProduct;
 
+    // ゲージ
+    GameObject gauge;
+
+    // 押した地点から押している地点までの斜辺の距離
+    float length = 0;
+    // 出した斜辺を小さくする用
+    const float kLengthSmall = 150;
+
     void Start()
     {
         this.player = GameObject.Find("player").transform;
 
+        this.gauge = GameObject.Find("Gauge");
+
         this.arrow = GameObject.Find("Arrow");
         startRotation = arrow.transform.rotation;
+        arrowTransform = this.arrow.GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        // 見えなくさせる
-        this.arrow.transform.localScale = Vector2.zero;
-
-        screenPos = Camera.WorldToScreenPoint();
+        // プレイヤーの座標の位置にUIを表示させるようにする
+        // 第一引数にカメラの情報を
+        // 第二引数に追従したいオブジェクトの座標を入手
+        arrowTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.position);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -77,8 +86,19 @@ public class ArrowDirector : MonoBehaviour
                 this.arrow.transform.localRotation = startRotation * Quaternion.Euler(0, 0, -angle);
             }
 
+            // ベクトルの大きさを表示
+            // そのままでは大きすぎるため値を小さくする
+            length = Mathf.Sqrt(endPos.x * endPos.x + endPos.y * endPos.y) / kLengthSmall;
+
             // 見えるようにさせる
+            this.gauge.transform.localScale = new Vector2(length, 1);
             this.arrow.transform.localScale = Vector2.one;
+        }
+        else
+        {
+            // 見えなくさせる
+            this.arrow.transform.localScale = Vector2.zero;
+            this.gauge.transform.localScale = Vector2.zero;
         }
     }
 }

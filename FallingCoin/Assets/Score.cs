@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;    // TextMeshProを使えるようにする
 using UnityEngine.SceneManagement;
 
-public class ScoreDirector : MonoBehaviour
+public class Score : MonoBehaviour
 {
     // スコアのアップ処理
     public void ScoreUp()
@@ -24,7 +24,7 @@ public class ScoreDirector : MonoBehaviour
     void Start()
     {
         // TextMeshProを得る
-        this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
+        this.textScore = GetComponent<TextMeshProUGUI>();
 
         // スコアデータの獲得(Scoreというデータがない場合0を代入)
         score = PlayerPrefs.GetInt("Score", 0);
