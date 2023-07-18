@@ -1,43 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBuff : MonoBehaviour
 {
-    // プレイヤーの速度をアップ
-    public Vector2 PlayerSpeedup(Vector2 pos)
-    {
-        Vector2 temp = pos;
-
-        // スピードアップアイテムターンであれば
-        if (speedupTurn > 0)
-        {
-            // 速度アップ
-            temp.x *= kSpeedupPower;
-
-            // ターンを減らす
-            speedupTurn--;
-        }
-
-        return temp;
-    }
-
-    // 敵の攻撃を受けるか
-    public bool isPlayerInvincible()
-    {
-        // 無敵がついている場合
-        if (invincibleUseNum > 0)
-        {
-            // ターンを減らす
-            invincibleUseNum--;
-
-            // 受けないとして返す
-            return false;
-        }
-
-        // 受けるとして返す
-        return true;
-    }
+    GameObject _countSpeedupText;
+    GameObject _countInvincibleText;
 
     // タグ検索用
     const string kSpeedupTag = "speedup";
@@ -58,11 +27,56 @@ public class PlayerBuff : MonoBehaviour
     // 無敵が適用される回数用変数
     int invincibleUseNum;
 
+
     void Start()
     {
+        _countSpeedupText = GameObject.Find("SpeedupCounter");
+        _countInvincibleText = GameObject.Find("InvincibleCounter");
+
         // ターン数の初期化
         speedupTurn = 0;
         invincibleUseNum = 0;
+    }
+
+    // プレイヤーの速度をアップ
+    public Vector2 PlayerSpeedup(Vector2 pos)
+    {
+        Vector2 temp = pos;
+
+        // スピードアップアイテムターンであれば
+        if (speedupTurn > 0)
+        {
+            // 速度アップ
+            temp.x *= kSpeedupPower;
+
+            // ターンを減らす
+            speedupTurn--;
+
+            // カウンターの減少
+            _countSpeedupText.GetComponent<Text>().text = speedupTurn.ToString();
+        }
+
+        return temp;
+    }
+
+    // 敵の攻撃を受けるか
+    public bool isPlayerInvincible()
+    {
+        // 無敵がついている場合
+        if (invincibleUseNum > 0)
+        {
+            // ターンを減らす
+            invincibleUseNum--;
+
+            // カウンターの減少
+            _countInvincibleText.GetComponent<Text>().text = invincibleUseNum.ToString();
+
+            // 受けないとして返す
+            return false;
+        }
+
+        // 受けるとして返す
+        return true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -73,6 +87,9 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             speedupTurn = kSpeedupTurnMax;
 
+            // カウンターの増加
+            _countSpeedupText.GetComponent<Text>().text = speedupTurn.ToString();
+
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
         }
@@ -82,6 +99,9 @@ public class PlayerBuff : MonoBehaviour
         {
             // ターンの増加
             invincibleUseNum = kInvincibleUseNumMax;
+
+            // カウンターの増加
+            _countInvincibleText.GetComponent <Text>().text = invincibleUseNum.ToString();
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
@@ -104,15 +124,5 @@ public class PlayerBuff : MonoBehaviour
                 invincibleUseNum = kInvincibleUseNumMax;
             }
         }
-    }
-
-    // ほかのスクリプトでも変数を使えるように関数化する
-    public int GetSpeedupTurn()
-    {
-        return speedupTurn;
-    }
-    public int GetInvincibleTurn()
-    {
-        return invincibleUseNum;
     }
 }
