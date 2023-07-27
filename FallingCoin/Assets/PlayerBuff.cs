@@ -16,7 +16,7 @@ public class PlayerBuff : MonoBehaviour
     const int kSpeedupTurnMax = 3;
 
     // buffでスピードアップする力
-    const float kSpeedupPower = 5;
+    const float kSpeedupPower = 2;
 
     // 使用可能ターン用変数
     int speedupTurn;
@@ -53,7 +53,7 @@ public class PlayerBuff : MonoBehaviour
             speedupTurn--;
 
             // カウンターの減少
-            _countSpeedupText.GetComponent<Text>().text = speedupTurn.ToString();
+            _countSpeedupText.GetComponent<Text>().text = "スピードアップ：" + speedupTurn.ToString();
         }
 
         return temp;
@@ -69,7 +69,7 @@ public class PlayerBuff : MonoBehaviour
             invincibleUseNum--;
 
             // カウンターの減少
-            _countInvincibleText.GetComponent<Text>().text = invincibleUseNum.ToString();
+            _countInvincibleText.GetComponent<Text>().text = "　　無　敵　　：" + invincibleUseNum.ToString();
 
             // 受けないとして返す
             return false;
@@ -88,7 +88,7 @@ public class PlayerBuff : MonoBehaviour
             speedupTurn = kSpeedupTurnMax;
 
             // カウンターの増加
-            _countSpeedupText.GetComponent<Text>().text = speedupTurn.ToString();
+            _countSpeedupText.GetComponent<Text>().text = "スピードアップ：" + speedupTurn.ToString();
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
@@ -101,7 +101,7 @@ public class PlayerBuff : MonoBehaviour
             invincibleUseNum = kInvincibleUseNumMax;
 
             // カウンターの増加
-            _countInvincibleText.GetComponent <Text>().text = invincibleUseNum.ToString();
+            _countInvincibleText.GetComponent <Text>().text = "　　無　敵　　：" + invincibleUseNum.ToString();
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
