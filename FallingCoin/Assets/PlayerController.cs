@@ -105,7 +105,10 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene("TashiroCreateScene2");
+        if (collision.gameObject.CompareTag("underFloor"))
+        {
+            SceneManager.LoadScene("TashiroCreateScene2");
+        }
     }
 
     // 敵に触れた場合動作する
@@ -139,8 +142,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 temp;
         // それぞれの軸に加える力を調節する
-        temp.x = (startPos.x - endPos.x) / 32;
-        temp.y = (startPos.y - endPos.y) / 24;
+        temp.x = (startPos.x - endPos.x) / 24;
+        temp.y = (startPos.y - endPos.y) / 16;
         return temp;
     }
 

@@ -37,7 +37,7 @@ public class ArrowDirector : MonoBehaviour
 
     void Start()
     {
-        this.player = GameObject.Find("player").transform;
+        this.player = GameObject.Find("Player").transform;
 
         this.gauge = GameObject.Find("Gauge");
 

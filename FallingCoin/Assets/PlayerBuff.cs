@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class PlayerBuff : MonoBehaviour
 {
-    GameObject _countSpeedupText;
-    GameObject _countInvincibleText;
-
-    // タグ検索用
-    const string kSpeedupTag = "speedup";
-    const string kInvincibleTag = "invincible";
+    TextMeshProUGUI _countSpeedupText;
+    TextMeshProUGUI _countInvincibleText;
 
     // スピードアップが適用するターン数
     const int kSpeedupTurnMax = 3;
@@ -30,8 +26,8 @@ public class PlayerBuff : MonoBehaviour
 
     void Start()
     {
-        _countSpeedupText = GameObject.Find("SpeedupCounter");
-        _countInvincibleText = GameObject.Find("InvincibleCounter");
+        _countSpeedupText = GameObject.Find("SpeedupCounter").GetComponent<TextMeshProUGUI>();
+        _countInvincibleText = GameObject.Find("InvincibleCounter").GetComponent<TextMeshProUGUI>();
 
         // ターン数の初期化
         speedupTurn = 0;
@@ -53,7 +49,7 @@ public class PlayerBuff : MonoBehaviour
             speedupTurn--;
 
             // カウンターの減少
-            _countSpeedupText.GetComponent<Text>().text = "スピードアップ：" + speedupTurn.ToString();
+            _countSpeedupText.SetText("スピードアップ：" + speedupTurn.ToString());
         }
 
         return temp;
@@ -69,7 +65,7 @@ public class PlayerBuff : MonoBehaviour
             invincibleUseNum--;
 
             // カウンターの減少
-            _countInvincibleText.GetComponent<Text>().text = "　　無　敵　　：" + invincibleUseNum.ToString();
+            _countInvincibleText.SetText("　　無　敵　　：" + invincibleUseNum.ToString());
 
             // 受けないとして返す
             return false;
@@ -82,26 +78,26 @@ public class PlayerBuff : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         // スピードアップアイテムを拾ったとき
-        if (collision.gameObject.CompareTag(kSpeedupTag))
+        if (collision.gameObject.CompareTag("speedup"))
         {
             // ターンの増加
             speedupTurn = kSpeedupTurnMax;
 
             // カウンターの増加
-            _countSpeedupText.GetComponent<Text>().text = "スピードアップ：" + speedupTurn.ToString();
+            _countSpeedupText.SetText("スピードアップ：" + speedupTurn.ToString());
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
         }
 
         // 無敵アイテムを拾ったとき
-        if (collision.gameObject.CompareTag(kInvincibleTag))
+        if (collision.gameObject.CompareTag("invincible"))
         {
             // ターンの増加
             invincibleUseNum = kInvincibleUseNumMax;
 
             // カウンターの増加
-            _countInvincibleText.GetComponent <Text>().text = "　　無　敵　　：" + invincibleUseNum.ToString();
+            _countInvincibleText.SetText("　　無　敵　　：" + invincibleUseNum.ToString());
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
