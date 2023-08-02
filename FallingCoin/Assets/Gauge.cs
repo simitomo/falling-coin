@@ -21,6 +21,14 @@ public class Gauge : MonoBehaviour
         startPos = Input.mousePosition;
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         // その時のマウスの位置を保存

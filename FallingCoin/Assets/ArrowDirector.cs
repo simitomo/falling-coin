@@ -5,30 +5,33 @@ using UnityEngine.UI;
 
 public class ArrowDirector : MonoBehaviour
 {
-    // 矢印を入れる用の変数
-    [SerializeField] GameObject arrow;
-    
-    
-    // ゲージ
-    [SerializeField] GameObject gauge;
+    // 生成したプレハブをキャンバス上に保存するための変数
+    GameObject canvas;
 
+    // 矢印を入れる用の変数
+    [SerializeField] GameObject arrowPrefab;
+    // ゲージ
+    [SerializeField] GameObject gaugePrefab;
+
+    GameObject instanceArrow;
+    GameObject instanceGauge;
 
     void Start()
     {
+        // Canvasを探してくる
+        canvas = GameObject.Find("Canvas");
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(this.arrow);
-            Instantiate(this.gauge);
-        }
+            instanceArrow = Instantiate(this.arrowPrefab);
+            instanceGauge = Instantiate(this.gaugePrefab);
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            Destroy(this.arrow);
-            Destroy(this.gauge);
+            // 複製したオブジェクトをCanvasに格納
+            instanceArrow.transform.SetParent(canvas.transform, false);
+            instanceGauge.transform.SetParent(canvas.transform, false);
         }
     }
 }

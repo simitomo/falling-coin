@@ -33,8 +33,18 @@ public class Arrow : MonoBehaviour
         arrowTransform = GetComponent<RectTransform>();
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
+        Debug.Log("[Arrow]OK1");
+
         // プレイヤーの座標の位置にUIを表示させるようにする
         // 第一引数にカメラの情報を
         // 第二引数に追従したいオブジェクトの座標を入手
@@ -64,5 +74,7 @@ public class Arrow : MonoBehaviour
         {
             this.transform.localRotation = startRotation * Quaternion.Euler(0, 0, -angle);
         }
+
+        Debug.Log("[Arrow]OK2");
     }
 }
