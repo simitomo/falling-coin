@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;    // TextMeshProを使えるようにする
 using UnityEngine.SceneManagement;
 
-public class Score : MonoBehaviour
+public class ScoreDirector : MonoBehaviour
 {
     // スコアのアップ処理
     public void ScoreUp()
@@ -24,7 +24,7 @@ public class Score : MonoBehaviour
     void Start()
     {
         // TextMeshProを得る
-        this.textScore = GetComponent<TextMeshProUGUI>();
+        this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
 
         // スコアデータの獲得(Scoreというデータがない場合0を代入)
         score = PlayerPrefs.GetInt("Score", 0);
@@ -39,6 +39,9 @@ public class Score : MonoBehaviour
 
     void Update()
     {
+        // テキストを描画
+        this.textScore.SetText("{0}", score);
+
         // デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -55,8 +58,5 @@ public class Score : MonoBehaviour
                 SceneManager.LoadScene("TashiroCreateScene2");
             }
         }
-
-        // テキストを描画
-        this.textScore.SetText("{0}", score);
     }
 }

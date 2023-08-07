@@ -24,18 +24,15 @@ public class PlayerController : MonoBehaviour
     // 強めに重力をかけるための変数
     Vector2 gravity = new Vector2(0, -19.6f);
 
-    // プレイヤーにパワーを追加
-    Vector2 playerPos;
+    // ジャンプをするための関数
+    Vector2 jumpForce = new Vector2(0, 500f);
 
     // AddForceを使う用の変数
     Rigidbody2D rigid;
     // バフを使う用の変数
     PlayerBuff buff;
     // スコアアップ用の変数
-    Score score;
-
-    // 力を加えるかのフラグ
-    bool isPower = false;
+    ScoreDirector score;
 
     void Start()
     {
@@ -44,7 +41,7 @@ public class PlayerController : MonoBehaviour
         // PlayerBuffのスクリプトを参照できるようにする
         buff = GetComponent<PlayerBuff>();
         // ScoreDirectorのスクリプトを参照できるようにする
-        score = GameObject.Find("Score").GetComponent<Score>();
+        score = GameObject.Find("Director").GetComponent<ScoreDirector>();
     }
 
     void Update()
@@ -60,15 +57,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             // playerPosにマウスを押した地点から離した地点を引いた座標を入れる
-            playerPos = PlayerPos(startPos, Input.mousePosition);
+            Vector2 playerPos = PlayerPos(startPos, Input.mousePosition);
             // 速度アップ処理
             playerPos = buff.PlayerSpeedup(playerPos);
-
-            isPower = true;
+            // 引っ張った距離だけ力を加える
+            this.rigid.AddForce(playerPos);
         }
 
-        // 右クリックが押された場合にX軸方向のスピードを反転する
-        if (Input.GetMouseButtonDown(1))
+        // スペースキーが押された場合にX軸方向のスピードを反転する
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
         }
@@ -77,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // 速度0(停止)
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetMouseButton(1))
             {
                 this.rigid.velocity = Vector2.zero;
             }
@@ -90,13 +87,6 @@ public class PlayerController : MonoBehaviour
         if (this.rigid.velocity.y != 0)
         {
             this.rigid.AddForce(gravity);
-        }
-
-        if (isPower)
-        {
-            // 引っ張った距離だけ力を加える
-            this.rigid.AddForce(playerPos);
-            isPower = false;
         }
     }
 
