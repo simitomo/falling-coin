@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;    // TextMeshProを使えるようにする
 using UnityEngine.SceneManagement;
 
-public class ScoreDirector : MonoBehaviour
+public class Score : MonoBehaviour
 {
     // スコアのアップ処理
     public void ScoreUp()

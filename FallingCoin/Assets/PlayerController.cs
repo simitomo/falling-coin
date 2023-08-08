@@ -1,22 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    /// マウスを押した地点から離した地点までの座標を計算して返す
-    private Vector2 PlayerPos(Vector2 startPos, Vector2 endPos)
-    {
-        Vector2 temp;
-        // それぞれの軸に加える力を調節する
-        temp.x = (startPos.x - endPos.x) / 2;
-        temp.y = (startPos.y - endPos.y) * 2;
-        return temp;
-    }
+    // 音声を流すよう
+    AudioSource aud;
 
-    // タグ検索用で定数を用意
-    const string kEnemyTag = "enemy";
-    const string kScoreTag = "score";
+    // 音声ファイル入れる用
+    public AudioClip coinSnapSE;
+    public AudioClip windoNoiseSE;
 
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
@@ -24,24 +18,29 @@ public class PlayerController : MonoBehaviour
     // 強めに重力をかけるための変数
     Vector2 gravity = new Vector2(0, -19.6f);
 
-    // ジャンプをするための関数
-    Vector2 jumpForce = new Vector2(0, 500f);
+    // プレイヤーにパワーを追加
+    Vector2 playerPos;
 
     // AddForceを使う用の変数
     Rigidbody2D rigid;
     // バフを使う用の変数
     PlayerBuff buff;
     // スコアアップ用の変数
-    ScoreDirector score;
+    Score score;
+
+    // 力を加えるかのフラグ
+    bool isPower = false;
 
     void Start()
     {
+        // AudioSourceを使えるように
+        aud = GetComponent<AudioSource>();
         // Rigidbody2Dの機能(AddForce)を使えるように参照する
         this.rigid = GetComponent<Rigidbody2D>();
         // PlayerBuffのスクリプトを参照できるようにする
         buff = GetComponent<PlayerBuff>();
         // ScoreDirectorのスクリプトを参照できるようにする
-        score = GameObject.Find("Director").GetComponent<ScoreDirector>();
+        score = GameObject.Find("Score").GetComponent<Score>();
     }
 
     void Update()
@@ -57,24 +56,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             // playerPosにマウスを押した地点から離した地点を引いた座標を入れる
-            Vector2 playerPos = PlayerPos(startPos, Input.mousePosition);
+            playerPos = PlayerPos(startPos, Input.mousePosition);
             // 速度アップ処理
             playerPos = buff.PlayerSpeedup(playerPos);
-            // 引っ張った距離だけ力を加える
-            this.rigid.AddForce(playerPos);
+
+            isPower = true;
         }
 
-        // スペースキーが押された場合にX軸方向のスピードを反転する
-        if (Input.GetKeyDown(KeyCode.Space))
+        // 右クリックが押された場合にX軸方向のスピードを反転する
+        if (Input.GetMouseButtonDown(1))
         {
             this.rigid.velocity = new Vector2(-this.rigid.velocity.x, this.rigid.velocity.y);
+
+            // はじいた時の音を鳴らす
+            this.aud.PlayOneShot(this.windoNoiseSE);
         }
 
         // デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // 速度0(停止)
-            if (Input.GetMouseButton(1))
+            if (Input.GetKey(KeyCode.Space))
             {
                 this.rigid.velocity = Vector2.zero;
             }
@@ -88,25 +90,44 @@ public class PlayerController : MonoBehaviour
         {
             this.rigid.AddForce(gravity);
         }
+
+        if (isPower)
+        {
+            // 引っ張った距離だけ力を加える
+            this.rigid.AddForce(playerPos, ForceMode2D.Impulse);
+
+            // はじいた時の音を鳴らす
+            this.aud.PlayOneShot(this.coinSnapSE);
+
+            isPower = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("underFloor"))
+        {
+            SceneManager.LoadScene("TashiroCreateScene2");
+        }
     }
 
     // 敵に触れた場合動作する
     void OnTriggerEnter2D(Collider2D collision)
     {
         // "enemy"というタグがつけられたオブジェクトのみ動作するようにする
-        if (collision.gameObject.CompareTag(kEnemyTag))
+        if (collision.gameObject.CompareTag("enemy"))
         {
-            // プレイヤーに無敵がついていない場合　　縦軸の速度はそのままで横軸のスピードを1/10にする
+            // プレイヤーに無敵がついていない場合　　スピードを1/10にする
             if (buff.isPlayerInvincible())
             {
-                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y);
+                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y / 10);
             }
 
             // 触れた敵を消す
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag(kScoreTag))
+        if (collision.gameObject.CompareTag("score"))
         {
             // スコアをアップする
             score.ScoreUp();
@@ -115,4 +136,15 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    /// マウスを押した地点から離した地点までの座標を計算して返す
+    private Vector2 PlayerPos(Vector2 startPos, Vector2 endPos)
+    {
+        Vector2 temp;
+        // それぞれの軸に加える力を調節する
+        temp.x = (startPos.x - endPos.x) / 24;
+        temp.y = (startPos.y - endPos.y) / 16;
+        return temp;
+    }
+
 }

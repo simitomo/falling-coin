@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/TashiroCreateScene.unity
+    path: Assets/Scenes/TashiroCreateScene.unity
     guid: 6f5987395b2237148823c31cec8b645d
   - enabled: 1
-    path: Assets/TashiroCreateScene2.unity
+    path: Assets/Scenes/TashiroCreateScene2.unity
     guid: 96d68d21b03f8824c8b0af03ad2f6506
   m_configObjects: {}
