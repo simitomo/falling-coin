@@ -32,6 +32,8 @@ public class Rezult : MonoBehaviour
 
         // スコアの初期化
         PlayerPrefs.SetInt("Score", 0);
+        // タイムの初期化
+        PlayerPrefs.SetInt("Time", 0);
     }
 
     void FixedUpdate()

@@ -17,6 +17,7 @@ public class TimeDirector : MonoBehaviour
     void Start()
     {
         this.textTimer = GetComponent<TextMeshProUGUI>();
+        frameCount = PlayerPrefs.GetInt("Time", 0);
     }
 
     // Update is called once per frame
