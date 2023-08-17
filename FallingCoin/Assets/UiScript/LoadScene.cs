@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoadScene : MonoBehaviour
 {
     string sceneName;
-    public bool isRezult;
+    public bool isRezult = false;
     public string materialNum;
 
     void Start()
