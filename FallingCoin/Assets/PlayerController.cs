@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip coinSnapSE;
     public AudioClip windoNoiseSE;
 
+    // パーティクル用
+    ParticleSystem par;
+
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
 
@@ -35,6 +38,10 @@ public class PlayerController : MonoBehaviour
     {
         // AudioSourceを使えるように
         aud = GetComponent<AudioSource>();
+        // ParticleSystemを使えるように
+        par = GetComponent<ParticleSystem>();
+        // パーティクルを止める
+        par.Stop();
         // Rigidbody2Dの機能(AddForce)を使えるように参照する
         this.rigid = GetComponent<Rigidbody2D>();
         // PlayerBuffのスクリプトを参照できるようにする
@@ -100,6 +107,17 @@ public class PlayerController : MonoBehaviour
             this.aud.PlayOneShot(this.coinSnapSE);
 
             isPower = false;
+
+            // パーティクルスタート
+            par.Play();
+        }
+
+        if (-5f <= this.rigid.velocity.x 
+            && this.rigid.velocity.x <= 5f
+            && this.rigid.velocity.y == 0)
+        {
+                // パーティクル停止
+                par.Stop();
         }
     }
 
@@ -146,5 +164,4 @@ public class PlayerController : MonoBehaviour
         temp.y = (startPos.y - endPos.y) / 16;
         return temp;
     }
-
 }

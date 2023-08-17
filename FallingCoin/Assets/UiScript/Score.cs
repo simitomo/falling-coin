@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;    // TextMeshProを使えるようにする
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
@@ -12,8 +12,7 @@ public class Score : MonoBehaviour
         score += kScorePoint;
     }
 
-    // TextMeshProを使う用の変数
-    TextMeshProUGUI textScore;
+    Text textScore;
 
     // アイテムをとって上がるスコアの得点
     const int kScorePoint = 1000;
@@ -23,8 +22,7 @@ public class Score : MonoBehaviour
 
     void Start()
     {
-        // TextMeshProを得る
-        this.textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
+        this.textScore = GameObject.Find("Score").GetComponent<Text>();
 
         // スコアデータの獲得(Scoreというデータがない場合0を代入)
         score = PlayerPrefs.GetInt("Score", 0);
@@ -40,7 +38,7 @@ public class Score : MonoBehaviour
     void Update()
     {
         // テキストを描画
-        this.textScore.SetText("{0}", score);
+        this.textScore.text = score.ToString();
 
         // デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
