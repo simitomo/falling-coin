@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class PlayerBuff : MonoBehaviour
 {
-    TextMeshProUGUI _countSpeedupText;
-    TextMeshProUGUI _countInvincibleText;
+    Text _countSpeedupText;
+    Text _countInvincibleText;
 
     // スピードアップが適用するターン数
     const int kSpeedupTurnMax = 3;
@@ -26,8 +26,8 @@ public class PlayerBuff : MonoBehaviour
 
     void Start()
     {
-        _countSpeedupText = GameObject.Find("SpeedupCounter").GetComponent<TextMeshProUGUI>();
-        _countInvincibleText = GameObject.Find("InvincibleCounter").GetComponent<TextMeshProUGUI>();
+        _countSpeedupText = GameObject.Find("SpeedupCounter").GetComponent<Text>();
+        _countInvincibleText = GameObject.Find("InvincibleCounter").GetComponent<Text>();
 
         // ターン数の初期化
         speedupTurn = 0;
@@ -49,7 +49,7 @@ public class PlayerBuff : MonoBehaviour
             speedupTurn--;
 
             // カウンターの減少
-            _countSpeedupText.SetText("スピードアップ：" + speedupTurn.ToString());
+            _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
         }
 
         return temp;
@@ -65,7 +65,7 @@ public class PlayerBuff : MonoBehaviour
             invincibleUseNum--;
 
             // カウンターの減少
-            _countInvincibleText.SetText("　　無　敵　　：" + invincibleUseNum.ToString());
+            _countInvincibleText.text = ("　　無　敵　　：" + invincibleUseNum.ToString());
 
             // 受けないとして返す
             return false;
@@ -84,7 +84,7 @@ public class PlayerBuff : MonoBehaviour
             speedupTurn = kSpeedupTurnMax;
 
             // カウンターの増加
-            _countSpeedupText.SetText("スピードアップ：" + speedupTurn.ToString());
+            _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
@@ -97,7 +97,7 @@ public class PlayerBuff : MonoBehaviour
             invincibleUseNum = kInvincibleUseNumMax;
 
             // カウンターの増加
-            _countInvincibleText.SetText("　　無　敵　　：" + invincibleUseNum.ToString());
+            _countInvincibleText.text = ("　　無　敵　　：" + invincibleUseNum.ToString());
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
