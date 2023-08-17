@@ -112,8 +112,8 @@ public class PlayerController : MonoBehaviour
             par.Play();
         }
 
-        if (-10f <= this.rigid.velocity.x 
-            && this.rigid.velocity.x <= 10f
+        if (-5f <= this.rigid.velocity.x 
+            && this.rigid.velocity.x <= 5f
             && this.rigid.velocity.y == 0)
         {
                 // パーティクル停止
