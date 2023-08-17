@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeIn : MonoBehaviour
+public class SoundFadeIn : MonoBehaviour
 {
     AudioSource aud;
     // どのくらいの時間をかけてフェードインするか
