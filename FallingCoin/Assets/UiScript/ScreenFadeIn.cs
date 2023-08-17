@@ -17,7 +17,12 @@ public class ScreenFadeIn : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (alpha <= 0) Destroy(this.gameObject);
+        // スクリプトの破壊
+        if (alpha <= 0)
+        {
+            Destroy(this);
+            this.gameObject.SetActive(false);
+        }
 
         alpha -= 0.015625f;
         if (alpha <= 0) alpha = 0;

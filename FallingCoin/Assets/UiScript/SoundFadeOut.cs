@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundFadeOut : MonoBehaviour
 {
     AudioSource aud;
-    GameObject player;
+    GameObject target;
     GameObject underFloor;
 
     float distance;
@@ -15,14 +15,14 @@ public class SoundFadeOut : MonoBehaviour
     void Start()
     {
         aud = GetComponent<AudioSource>();
-        player = GameObject.Find("Player");
+        target = GameObject.Find("Player");
         underFloor = GameObject.FindGameObjectWithTag("underFloor");
     }
 
     void FixedUpdate()
     {
         // プレイヤーと最下部の地面との距離を測る
-        distance = player.transform.position.y - underFloor.transform.position.y;
+        distance = target.transform.position.y - underFloor.transform.position.y;
 
         // 距離が規定以内であればボリュームを下げていく
         if (distance < kDistanceMax)

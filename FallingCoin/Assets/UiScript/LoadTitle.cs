@@ -7,6 +7,6 @@ public class LoadTitle : MonoBehaviour
 {
     public void OnClick()
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("TitleSceen");
     }
 }
