@@ -35,14 +35,18 @@ public class StartButton : MonoBehaviour
 
             if (alpha <= 0.0f)
             {
-                alpha = 1.0f;
-
                 countNo--;
                 if (countNo < 0)
                 {
-                    string mapString = "map" + (Random.Range(0, 3) + 1).ToString() + "-1";
+                    isStart = false;
 
-                    SceneManager.LoadScene("map1-1");
+                    string mapString = "Map" + (Random.Range(0, 3) + 1).ToString() + "-1";
+
+                    SceneManager.LoadScene(mapString);
+                }
+                else
+                {
+                    alpha = 1.0f;
                 }
             }
 
@@ -52,7 +56,7 @@ public class StartButton : MonoBehaviour
             if (countNo == 0)
             {
                 aud.volume = alpha;
-                img.color = new Color(0, 0, 0, alpha);
+                img.color = new Color(0, 0, 0, 1 - alpha);
             }
         }
     }

@@ -9,6 +9,7 @@ TagManager:
   - speedup
   - score
   - invincible
+  - underFloor
   layers:
   - Default
   - TransparentFX

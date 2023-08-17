@@ -14,7 +14,7 @@ public class LoadScene : MonoBehaviour
         if (!isRezult)
         {
             // マップのロード名
-            sceneName = "map" + (Random.Range(0, 3) + 1).ToString() + "-" + materialNum;
+            sceneName = "Map" + (Random.Range(0, 3) + 1).ToString() + "-" + materialNum;
         }
         else
         {

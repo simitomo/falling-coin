@@ -38,5 +38,9 @@ public class SoundFadeIn : MonoBehaviour
             // ボリュームを徐々にあげるようにする
             aud.volume = fadeFrame / fadeFrameTime;
         }
+        else
+        {
+            Destroy(this);
+        }
     }
 }
