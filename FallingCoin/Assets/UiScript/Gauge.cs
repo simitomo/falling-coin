@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
@@ -13,12 +13,16 @@ public class Gauge : MonoBehaviour
 
     // 押した地点から押している地点までの斜辺の距離
     float length = 0;
-    // 出した斜辺を小さくする用
-    const float kLengthSmall = 150;
+    float kLength = 600f;
+
+    Slider slider;
 
     private void Start()
     {
+        slider = GetComponent<Slider>();
+
         startPos = Input.mousePosition;
+
     }
 
     void Update()
@@ -38,9 +42,13 @@ public class Gauge : MonoBehaviour
 
         // ベクトルの大きさを表示
         // そのままでは大きすぎるため値を小さくする
-        length = Mathf.Sqrt(endPos.x * endPos.x + endPos.y * endPos.y) / kLengthSmall;
+        length = Mathf.Sqrt(endPos.x * endPos.x + endPos.y * endPos.y);
 
-        // 見えるようにさせる
-        this.transform.localScale = new Vector2(length, 1);
+        if (kLength <= length)
+        {
+            length = kLength;
+        }
+
+        slider.value = length / kLength;
     }
 }

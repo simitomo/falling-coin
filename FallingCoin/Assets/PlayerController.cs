@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     // 力を加えるかのフラグ
     bool isPower = false;
 
+    Vector3 arrow = new Vector3(0, 0, 1.0f);
+
     void Start()
     {
         // AudioSourceを使えるように
@@ -97,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        this.transform.rotation *= Quaternion.AngleAxis(-this.rigid.velocity.x, arrow);
+
         // 縦軸のスピードが0じゃないとき重力を強めにかける
         if (this.rigid.velocity.y != 0)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenFadeIn : MonoBehaviour
+public class ScreenFade : MonoBehaviour
 {
     float alpha = 1f;
     Image image;
