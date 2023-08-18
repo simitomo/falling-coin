@@ -8,12 +8,22 @@ public class Rezult : MonoBehaviour
     int score;
     int maxScore;
     Text scorePointTxt;
-    [SerializeField] GameObject scoreRank; 
+    public GameObject canvas;
+
+    public GameObject scoreRankS;
+    public GameObject scoreRankA;
+    public GameObject scoreRankB;
+    public GameObject scoreRankC;
+
+    GameObject rankInstance;
 
     Vector2 size = Vector2.one;//new Vector2(2.0f, 2.0f);
     bool isUp = true;
 
-    bool isEffect = true;
+    bool isEffect = false;
+
+    int effectCount = 0;
+    const float kEffectSpeed = 0.0078125f;
 
     void Start()
     {
@@ -38,20 +48,21 @@ public class Rezult : MonoBehaviour
         // スコアランク表記
         if (score >= 100)
         {
-            scoreRank.GetComponent<Text>().text = "S";
+            rankInstance = Instantiate(scoreRankS);
         }
         else if (score >= 80)
         {
-            scoreRank.GetComponent<Text>().text = "A";
+            rankInstance = Instantiate(scoreRankA);
         }
         else if (score >= 60)
         {
-            scoreRank.GetComponent<Text>().text = "B";
+            rankInstance = Instantiate(scoreRankB);
         }
         else
         {
-            scoreRank.GetComponent<Text>().text = "C";
+            rankInstance = Instantiate(scoreRankC);
         }
+        rankInstance.transform.SetParent(canvas.transform, false);
 
         // スコアの初期化
         PlayerPrefs.SetInt("Score", 0);
@@ -65,9 +76,12 @@ public class Rezult : MonoBehaviour
     {
         if (isEffect)
         {
-            if (size.x >= 1.5f)
+            if (3 <= effectCount) isEffect = false;
+
+            if (size.x >= 1.4f)
             {
                 isUp = false;
+                effectCount++;
             }
             if (size.x <= 1f)
             {
@@ -76,16 +90,17 @@ public class Rezult : MonoBehaviour
 
             if (isUp)
             {
-                size.x += 0.00625f;
-                size.y += 0.00625f;
+                size.x += kEffectSpeed;
+                size.y += kEffectSpeed;
             }
             else
             {
-                size.x -= 0.00625f;
-                size.y -= 0.00625f;
+                size.x -= kEffectSpeed;
+                size.y -= kEffectSpeed;
             }
 
-            this.transform.localScale = size;
+            rankInstance.transform.localScale = size;
         }
+        
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundControl : MonoBehaviour
 {
-    [SerializeField] GameObject backgroundPrefab;
+    public GameObject backgroundPrefab;
     GameObject bg1;
     GameObject bg2;
 

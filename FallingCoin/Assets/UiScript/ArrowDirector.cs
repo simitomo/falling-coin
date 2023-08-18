@@ -9,9 +9,9 @@ public class ArrowDirector : MonoBehaviour
     GameObject canvas;
 
     // 矢印を入れる用の変数
-    [SerializeField] GameObject arrowPrefab;
+    public GameObject arrowPrefab;
     // ゲージ
-    [SerializeField] GameObject gaugePrefab;
+    public GameObject gaugePrefab;
 
     GameObject instanceArrow;
     GameObject instanceGauge;
@@ -24,6 +24,8 @@ public class ArrowDirector : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             instanceArrow = Instantiate(this.arrowPrefab);
