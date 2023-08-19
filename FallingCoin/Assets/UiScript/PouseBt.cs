@@ -25,6 +25,7 @@ public class PouseBt : MonoBehaviour
         Debug.Log("[Pouse]push");
         Time.timeScale = 0.0f;
 
+        this.gameObject.SetActive(false);
         battenMark.SetActive(true);
         TitleBt.SetActive(true);
         nowInstance = Instantiate(pouse);
@@ -35,6 +36,7 @@ public class PouseBt : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
+        this.gameObject.SetActive(true);
         battenMark.SetActive(false);
         TitleBt.SetActive(false);
 
