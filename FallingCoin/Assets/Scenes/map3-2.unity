@@ -92209,7 +92209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRezult: 0
-  materialNum: 2
+  materialNum: 3
 --- !u!82 &1699428820
 AudioSource:
   m_ObjectHideFlags: 0
