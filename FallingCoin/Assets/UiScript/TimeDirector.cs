@@ -32,4 +32,9 @@ public class TimeDirector : MonoBehaviour
 
         this.textTimer.text = min.ToString() + ":" + sec.ToString("D2")+"."+miliSec.ToString("D2");
     }
+
+    void OnDestroy()
+    {
+        PlayerPrefs.SetInt("Time", frameCount);
+    }
 }
