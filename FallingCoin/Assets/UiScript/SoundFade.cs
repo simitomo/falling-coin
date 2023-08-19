@@ -12,6 +12,10 @@ public class SoundFade : MonoBehaviour
     // フェードイン処理をするかの判定
     bool isFadeIn = true;
 
+    float screenFade = 1.0f;
+    float kScreenFadeOut = 4f;
+    public GameObject fade;
+    Image fadeImg;
 
     GameObject target;
     GameObject underFloor;
@@ -22,6 +26,8 @@ public class SoundFade : MonoBehaviour
 
     void Start()
     {
+        fadeImg = fade.GetComponent<Image>();
+
         aud = GetComponent<AudioSource>();
         target = GameObject.Find("Player");
         underFloor = GameObject.FindGameObjectWithTag("underFloor");
@@ -44,6 +50,9 @@ public class SoundFade : MonoBehaviour
             // ボリュームを徐々にあげるようにする
             aud.volume = fadeInAlpha;
 
+            screenFade -= 0.0625f;
+            if (screenFade <= 0) screenFade = 0;
+            fadeImg.color = new Color(0, 0, 0, screenFade);
         }
         else
         {
@@ -54,6 +63,11 @@ public class SoundFade : MonoBehaviour
             if (distance < kDistanceMax)
             {
                 aud.volume = distance / kDistanceMax;
+            }
+
+            if (distance < kScreenFadeOut)
+            {
+                fadeImg.color = new Color(0, 0, 0, 1 - distance / kScreenFadeOut);
             }
         }
     }
