@@ -17,6 +17,8 @@ public class TimeDirector : MonoBehaviour
     {
         this.textTimer = GetComponent<Text>();
         frameCount = PlayerPrefs.GetInt("Time", 0);
+
+        Debug.Log("[Time]Start : " + frameCount);
     }
 
     // Update is called once per frame
@@ -33,8 +35,10 @@ public class TimeDirector : MonoBehaviour
         this.textTimer.text = min.ToString() + ":" + sec.ToString("D2")+"."+miliSec.ToString("D2");
     }
 
-    void OnDestroy()
+    public void TimeSet()
     {
         PlayerPrefs.SetInt("Time", frameCount);
+
+        Debug.Log("[Time]End : " + frameCount);
     }
 }

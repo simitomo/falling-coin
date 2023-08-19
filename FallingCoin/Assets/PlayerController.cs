@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     // ロード用
     LoadScene scene;
+    TimeDirector time;
 
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         par.Stop();
         // シーンのロード用
         scene = GetComponent<LoadScene>();
+        time = GameObject.Find("Timer").GetComponent<TimeDirector>();
         // Rigidbody2Dの機能(AddForce)を使えるように参照する
         this.rigid = GetComponent<Rigidbody2D>();
         // PlayerBuffのスクリプトを参照できるようにする
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("underFloor"))
         {
+            time.TimeSet();
+
             scene.LoadMap();
         }
     }
