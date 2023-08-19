@@ -85323,7 +85323,7 @@ GameObject:
   - component: {fileID: 409950511}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: underFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106793,11 +106793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314950869915929107, guid: 69e813f5bb3fb3c408598a3fbc4ea6d8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3.0105896
+      value: -3.01062
       objectReference: {fileID: 0}
     - target: {fileID: 4314950869915929107, guid: 69e813f5bb3fb3c408598a3fbc4ea6d8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.1212006
+      value: 2.1212158
       objectReference: {fileID: 0}
     - target: {fileID: 4314950869915929107, guid: 69e813f5bb3fb3c408598a3fbc4ea6d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
