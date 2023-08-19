@@ -24,6 +24,9 @@ public class TitleBt : MonoBehaviour
     public GameObject canvas;
     public GameObject battenMark;
     public GameObject Guide1;
+    public GameObject Guide2;
+    public GameObject rightBt;
+    public GameObject leftBt;
     GameObject nowInstance;
 
     // 終了用に使う変数
@@ -92,20 +95,46 @@ public class TitleBt : MonoBehaviour
         Debug.Log("GuidePush");
 
         battenMark.SetActive(true);
+
+        rightBt.SetActive(true);
         nowInstance = Instantiate(Guide1);
         nowInstance.transform.SetParent(canvas.transform, false);
     }
 
-    public void DestroyInstance()
+    public void DestroyBt()
     {
         battenMark.SetActive(false);
 
         Destroy(nowInstance);
+
+        rightBt.SetActive(false);
+        leftBt.SetActive(false);
     }
 
-    public void ChangeInstance()
+    public void RightBt()
     {
+        // 現在のものを削除
+        Destroy(nowInstance);
 
+        // 次のものを生成
+        nowInstance = Instantiate(Guide2);
+        nowInstance.transform.SetParent(canvas.transform, false);
+
+        rightBt.SetActive(false);
+        leftBt.SetActive(true);
+    }
+
+    public void LeftBt()
+    {
+        // 現在のものを削除
+        Destroy(nowInstance);
+
+        // 次のものを生成
+        nowInstance = Instantiate(Guide1);
+        nowInstance.transform.SetParent(canvas.transform, false);
+
+        leftBt.SetActive(false);
+        rightBt.SetActive(true);
     }
 
     // 終了ボタン
