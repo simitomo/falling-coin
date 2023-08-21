@@ -6,13 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
-    // スコアのアップ処理
-    public void ScoreUp()
-    {
-        score += kScorePoint;
-    }
+    
 
     Text textScore;
+
+    int downScore = 100;
 
     // アイテムをとって上がるスコアの得点
     const int kScorePoint = 1000;
@@ -33,6 +31,22 @@ public class Score : MonoBehaviour
     {
         // スコアの値をScoreというデータに保存
         PlayerPrefs.SetInt("Score", score);
+    }
+
+    // スコアのアップ処理
+    public void ScoreUp()
+    {
+        score += kScorePoint;
+    }
+
+    // スコアダウン処理
+    public void ScoreDonw()
+    {
+        downScore = score / 10;
+        if (200 < downScore)
+            downScore = 200;
+
+        score -= downScore;
     }
 
     void Update()

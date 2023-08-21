@@ -150,10 +150,11 @@ public class PlayerController : MonoBehaviour
         // "enemy"というタグがつけられたオブジェクトのみ動作するようにする
         if (collision.gameObject.CompareTag("enemy"))
         {
-            // プレイヤーに無敵がついていない場合　　スピードを1/10にする
+            // プレイヤーに無敵がついていない場合
             if (buff.isPlayerInvincible())
             {
                 this.rigid.velocity = new Vector2(this.rigid.velocity.x / 16, this.rigid.velocity.y / 32);
+                score.ScoreDonw();
             }
 
             // 触れた敵を消す
