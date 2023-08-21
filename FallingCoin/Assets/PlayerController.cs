@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
             // プレイヤーに無敵がついていない場合　　スピードを1/10にする
             if (buff.isPlayerInvincible())
             {
-                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 10, this.rigid.velocity.y / 10);
+                this.rigid.velocity = new Vector2(this.rigid.velocity.x / 16, this.rigid.velocity.y / 32);
             }
 
             // 触れた敵を消す
