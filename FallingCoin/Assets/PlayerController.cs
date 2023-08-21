@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     bool isFlash = false;
     float flashAlpha = 1.0f;
     int flashFrame = 0;
-    Color c = new Color();
+    Color c = new Color(1, 1, 1);
 
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         {
             flashFrame++;
 
-            if (flashFrame % 5 == 0)
+            if (flashFrame % 10 == 0)
             {
                 if (flashAlpha == 1.0f) flashAlpha = 0.0f;
                 else                    flashAlpha = 1.0f;
