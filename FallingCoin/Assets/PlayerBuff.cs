@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerBuff : MonoBehaviour
 {
+    public GameObject canvas;
+    Camera cam;
+    Vector2 SetPos;
+
     AudioSource aud;
     [SerializeField] private AudioClip[] clips;
 
@@ -14,11 +18,10 @@ public class PlayerBuff : MonoBehaviour
     bool isFadeBgm = false;
     bool isChangBgm = false;
 
-    Text _countSpeedupText;
-    Text _countInvincibleText;
-
     // スピードアップが適用するターン数
     const int kSpeedupTurnMax = 3;
+    [SerializeField] GameObject[] speedUp;
+    GameObject speedUpInstance = null;
 
     // buffでスピードアップする力
     const float kSpeedupPower = 2;
@@ -28,6 +31,8 @@ public class PlayerBuff : MonoBehaviour
 
     // 無敵が適用される回数
     const int kInvincibleUseNumMax = 3;
+    [SerializeField] GameObject[] invincible;
+    GameObject invincibleInstance = null;
 
     // 無敵が適用される回数用変数
     int invincibleUseNum;
@@ -35,19 +40,15 @@ public class PlayerBuff : MonoBehaviour
 
     void Start()
     {
+        cam = Camera.main;
+
         aud = GetComponent<AudioSource>();
         aud.clip = clips[audioNo];
         aud.Play();
 
-        _countSpeedupText = GameObject.Find("SpeedupCounter").GetComponent<Text>();
-        _countInvincibleText = GameObject.Find("InvincibleCounter").GetComponent<Text>();
-
         // ターン数の初期化
         speedupTurn = 0;
         invincibleUseNum = 0;
-
-        _countSpeedupText.text = "";
-        _countInvincibleText.text = "";
     }
 
     void FixedUpdate()
@@ -86,6 +87,22 @@ public class PlayerBuff : MonoBehaviour
 
             isChangBgm = false;
         }
+
+        if (speedUpInstance != null)
+        {
+            SetPos = cam.WorldToScreenPoint(this.gameObject.transform.position);
+            SetPos.x += 10f;
+            SetPos.y += 10f;
+            speedUpInstance.transform.position = SetPos;
+        }
+
+        if (invincibleInstance != null)
+        {
+            SetPos = cam.WorldToScreenPoint(this.gameObject.transform.position);
+            SetPos.x -= 10f;
+            SetPos.y += 10f;
+            invincibleInstance.transform.position = SetPos;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -96,8 +113,13 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             speedupTurn = kSpeedupTurnMax;
 
-            // カウンターの増加
-            _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
+            speedUpInstance = Instantiate(speedUp[speedupTurn - 1]);
+            speedUpInstance.transform.SetParent(canvas.transform, false);
+
+            SetPos = cam.WorldToScreenPoint(this.gameObject.transform.position);
+            SetPos.x += 10f;
+            SetPos.y += 10f;
+            speedUpInstance.transform.position = SetPos;
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
@@ -109,8 +131,13 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             invincibleUseNum = kInvincibleUseNumMax;
 
-            // カウンターの増加
-            _countInvincibleText.text = ("　　ガード　　：" + invincibleUseNum.ToString());
+            invincibleInstance = Instantiate(invincible[invincibleUseNum - 1]);
+            invincibleInstance.transform.SetParent(canvas.transform, false);
+
+            SetPos = cam.WorldToScreenPoint(this.gameObject.transform.position);
+            SetPos.x -= 10f;
+            SetPos.y += 10f;
+            invincibleInstance.transform.position = SetPos;
 
             // 拾ったアイテムの削除
             Destroy(collision.gameObject);
@@ -155,11 +182,15 @@ public class PlayerBuff : MonoBehaviour
             // カウンターの減少
             if (0 < speedupTurn)
             {
-                _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
+                Destroy(speedUpInstance);
+
+                speedUpInstance = Instantiate(speedUp[speedupTurn - 1]);
+                speedUpInstance.transform.SetParent(canvas.transform, false);
+
             }
             else
             {
-                _countSpeedupText.text = "";
+                if (speedUpInstance != null)    Destroy(speedUpInstance);
             }
         }
 
@@ -178,11 +209,14 @@ public class PlayerBuff : MonoBehaviour
             // カウンターの減少
             if (0 < invincibleUseNum)
             {
-                _countInvincibleText.text = ("　　ガード　　：" + invincibleUseNum.ToString());
+                Destroy(invincibleInstance);
+
+                invincibleInstance = Instantiate(invincible[invincibleUseNum - 1]);
+                invincibleInstance.transform.SetParent(canvas.transform, false);
             }
             else
             {
-                _countInvincibleText.text = "";
+                if (invincibleInstance != null) Destroy(invincibleInstance);
             }
 
             // 受けないとして返す

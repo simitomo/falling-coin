@@ -41,8 +41,8 @@ public class Score : MonoBehaviour
     // スコアダウン処理
     public void ScoreDonw()
     {
-        downScore = score / 10;
-        if (200 < downScore)
+        downScore = score / 4;
+        if (500 < downScore)
             downScore = 200;
 
         score -= downScore;

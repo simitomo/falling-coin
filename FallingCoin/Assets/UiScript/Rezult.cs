@@ -7,13 +7,13 @@ public class Rezult : MonoBehaviour
 {
     int score;
     int maxScore;
-    const int kClearScore = 1000;
+    int clearScore = 1000;
     Text scorePointTxt;
     public GameObject canvas;
     int time;
     // 秒×50
-    const int kMinTime = 6000;      // 現在２分
-    const int kMaxTime = 15000;     // 現在５分
+    const int kMinTime = 4500;      // 現在1分30
+    const int kMaxTime = 9000;     // 現在3分
 
     public GameObject scoreRankS;
     public GameObject scoreRankA;
@@ -40,15 +40,13 @@ public class Rezult : MonoBehaviour
         // タイムを代入
         time = PlayerPrefs.GetInt("Time");
 
-        score += kClearScore;
-
         if (time < kMinTime)
         {
-            score = (int)(score * 1.5);
+            score += (int)(clearScore * 1.5);
         }
         else if (kMaxTime < time)
         {
-            score = (int)(score * (1 + ((kMaxTime - time) / kMaxTime) ) );
+            score += (int)(clearScore * (1 + ((kMaxTime - time) / kMaxTime) ) );
         }
 
         // スコアランク表記
