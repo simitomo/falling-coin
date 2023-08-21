@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     // 音声ファイル入れる用
     public AudioClip coinSnapSE;
     public AudioClip windoNoiseSE;
+    public AudioClip HitSe;
 
     // パーティクル用
     ParticleSystem par;
@@ -192,6 +193,8 @@ public class PlayerController : MonoBehaviour
 
                 this.rigid.velocity = new Vector2(this.rigid.velocity.x / 16, this.rigid.velocity.y / 32);
                 score.ScoreDonw();
+
+                this.aud.PlayOneShot(this.HitSe);
             }
 
             // 触れた敵を消す
