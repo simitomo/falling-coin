@@ -5552,6 +5552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinSnapSE: {fileID: 8300000, guid: 92e0b6cb7576e744099c126c76f69244, type: 3}
   windoNoiseSE: {fileID: 8300000, guid: f1a08981862c0fa48a19e894a1e0e7c3, type: 3}
+  HitSe: {fileID: 8300000, guid: 28fefd283fc81654eaeeadf33322338b, type: 3}
 --- !u!1 &691995218
 GameObject:
   m_ObjectHideFlags: 0
