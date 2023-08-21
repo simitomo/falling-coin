@@ -111887,9 +111887,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddce5a6922e1344fa9c92cc2d233df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 86018689}
   clips:
   - {fileID: 8300000, guid: 4ca9aecf6de25c844977751e8de6956a, type: 3}
   - {fileID: 8300000, guid: d814efa05b5432042a9d33711bbdc7f9, type: 3}
+  speedUp:
+  - {fileID: 2452275427343761395, guid: 5cb4a6ceeadccc948a034f787ddbab5c, type: 3}
+  - {fileID: 3436851091150572147, guid: f0df11d5325d5f645a82174b212de903, type: 3}
+  - {fileID: 1865355730792075344, guid: def914b1667df2149b1be524f297a434, type: 3}
+  invincible:
+  - {fileID: 8690378239020373198, guid: 2ecfe6c3fb7592049b155481bfc9fe29, type: 3}
+  - {fileID: 3798229843893947612, guid: 9177abec43e9d17429ed650b0db3aed3, type: 3}
+  - {fileID: 248827173137192247, guid: dbf1ecf39d8c070409fb714719040890, type: 3}
 --- !u!50 &1446569069
 Rigidbody2D:
   serializedVersion: 4
