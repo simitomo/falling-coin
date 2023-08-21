@@ -62,14 +62,14 @@ public class PouseBt : MonoBehaviour
 
     public void YesBt()
     {
+        Time.timeScale = 1.0f;
+
         // スコアの初期化
         PlayerPrefs.SetInt("Score", 0);
         // タイムの初期化
         PlayerPrefs.SetInt("Time", 0);
 
         SceneManager.LoadScene("TitleSceen");
-
-        Time.timeScale = 1.0f;
     }
     public void NoBt()
     {
