@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &75796527
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3783478
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 67.098946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1660086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181614, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472622028914181615, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
+      propertyPath: m_Name
+      value: EnemyObj2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb720459b1a1acb4db95c409de2fcd97, type: 3}
 --- !u!1 &86018689
 GameObject:
   m_ObjectHideFlags: 0
@@ -103367,16 +103424,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -10, y: -9, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 17, y: -9, z: 0}
     second:
       serializedVersion: 2
@@ -110701,7 +110748,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1362
+  - m_RefCount: 1361
     m_Data: {fileID: 11400000, guid: 159e68343cd7c304bbf3239c3edb8715, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -110712,7 +110759,7 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1362
+  - m_RefCount: 1361
     m_Data: {fileID: 21300000, guid: a1ceaa4adaa14c7479e48a7ddd41dc50, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -110721,7 +110768,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 2c99ad989e6fff144a4d6214d7c7adbb, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1366
+  - m_RefCount: 1365
     m_Data:
       e00: 1
       e01: 0
@@ -110740,7 +110787,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1366
+  - m_RefCount: 1365
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
