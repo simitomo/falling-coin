@@ -74,6 +74,7 @@ public class PlayerBuff : MonoBehaviour
         }
 
         // フェードさせる
+
         if (isFadeBgm) FadeBgm();
 
         if (isChangBgm)
@@ -84,6 +85,35 @@ public class PlayerBuff : MonoBehaviour
             aud.Play();
 
             isChangBgm = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // スピードアップアイテムを拾ったとき
+        if (collision.gameObject.CompareTag("speedup"))
+        {
+            // ターンの増加
+            speedupTurn = kSpeedupTurnMax;
+
+            // カウンターの増加
+            _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
+
+            // 拾ったアイテムの削除
+            Destroy(collision.gameObject);
+        }
+
+        // 無敵アイテムを拾ったとき
+        if (collision.gameObject.CompareTag("invincible"))
+        {
+            // ターンの増加
+            invincibleUseNum = kInvincibleUseNumMax;
+
+            // カウンターの増加
+            _countInvincibleText.text = ("　　ガード　　：" + invincibleUseNum.ToString());
+
+            // 拾ったアイテムの削除
+            Destroy(collision.gameObject);
         }
     }
 
@@ -163,37 +193,10 @@ public class PlayerBuff : MonoBehaviour
         return true;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        // スピードアップアイテムを拾ったとき
-        if (collision.gameObject.CompareTag("speedup"))
-        {
-            // ターンの増加
-            speedupTurn = kSpeedupTurnMax;
-
-            // カウンターの増加
-            _countSpeedupText.text = ("スピードアップ：" + speedupTurn.ToString());
-
-            // 拾ったアイテムの削除
-            Destroy(collision.gameObject);
-        }
-
-        // 無敵アイテムを拾ったとき
-        if (collision.gameObject.CompareTag("invincible"))
-        {
-            // ターンの増加
-            invincibleUseNum = kInvincibleUseNumMax;
-
-            // カウンターの増加
-            _countInvincibleText.text = ("　　ガード　　：" + invincibleUseNum.ToString());
-
-            // 拾ったアイテムの削除
-            Destroy(collision.gameObject);
-        }
-    }
 
     void Update()
     {
+#if UNITY_EDITOR
         // デバッグ用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -208,5 +211,6 @@ public class PlayerBuff : MonoBehaviour
                 invincibleUseNum = kInvincibleUseNumMax;
             }
         }
+#endif
     }
 }

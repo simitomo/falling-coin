@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
             this.aud.PlayOneShot(this.windoNoiseSE);
         }
 
+#if UNITY_EDITOR
         // デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
                 this.rigid.velocity = Vector2.zero;
             }
         }
+#endif
     }
 
     void FixedUpdate()

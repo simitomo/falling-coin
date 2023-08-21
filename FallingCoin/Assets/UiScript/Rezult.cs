@@ -119,6 +119,5 @@ public class Rezult : MonoBehaviour
 
             rankInstance.transform.localScale = size;
         }
-        
     }
 }

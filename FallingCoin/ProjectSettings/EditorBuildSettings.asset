@@ -15,26 +15,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Map1-1.unity
     guid: cc0382b2974c34b4dbe4e8ae8b729c41
   - enabled: 1
-    path: Assets/Scenes/Map1-2.unity
-    guid: e80fa3ac23f4dda4c9625a597664d3c9
-  - enabled: 1
-    path: Assets/Scenes/Map1-3.unity
-    guid: 3df22aaeb36947f489eb61edd0c37726
-  - enabled: 1
     path: Assets/Scenes/map2-1.unity
     guid: 75a33200211c8cc48aa7b424fb8a8c46
-  - enabled: 1
-    path: Assets/Scenes/map2-2.unity
-    guid: a3bae82024b711542ad8cccd7f8608af
-  - enabled: 1
-    path: Assets/Scenes/map2-3.unity
-    guid: 50b9c80204ba1504492f14e42dc48f14
   - enabled: 1
     path: Assets/Scenes/map3-1.unity
     guid: 63c2f1a4a76f0fb4080ac0761a078b7e
   - enabled: 1
+    path: Assets/Scenes/Map1-2.unity
+    guid: e80fa3ac23f4dda4c9625a597664d3c9
+  - enabled: 1
+    path: Assets/Scenes/map2-2.unity
+    guid: a3bae82024b711542ad8cccd7f8608af
+  - enabled: 1
     path: Assets/Scenes/map3-2.unity
     guid: bfb932eb7f6431f4cbf63e77ac1ff6b9
+  - enabled: 1
+    path: Assets/Scenes/Map1-3.unity
+    guid: 3df22aaeb36947f489eb61edd0c37726
+  - enabled: 1
+    path: Assets/Scenes/map2-3.unity
+    guid: 50b9c80204ba1504492f14e42dc48f14
   - enabled: 1
     path: Assets/Scenes/map3-3.unity
     guid: 95dbb2941afb4df4c9a75d3dff4b5da3

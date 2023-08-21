@@ -40,7 +40,9 @@ public class Score : MonoBehaviour
         // テキストを描画
         this.textScore.text = score.ToString();
 
-        // デバック用コード
+
+#if UNITY_EDITOR
+        //デバック用コード
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (Input.GetKey(KeyCode.P))
@@ -56,5 +58,6 @@ public class Score : MonoBehaviour
                 SceneManager.LoadScene("TashiroCreateScene2");
             }
         }
+#endif
     }
 }
