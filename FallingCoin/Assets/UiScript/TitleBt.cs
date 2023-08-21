@@ -8,6 +8,11 @@ public class TitleBt : MonoBehaviour
     // スタートに使う変数
     bool isStart = false;
 
+
+    public GameObject startBt;
+    public GameObject guideBt;
+    public GameObject quitBt;
+
     public GameObject countDown;
     public GameObject mainCamera;
     public GameObject fade;
@@ -87,12 +92,18 @@ public class TitleBt : MonoBehaviour
         isStart = true;
         this.countDown.SetActive(true);
         this.fade.SetActive(true);
+
+        startBt.SetActive(false);
+        guideBt.SetActive(false);
+        quitBt.SetActive(false);
     }
 
     // 説明ボタンに使う関数
     public void GuideBt()
     {
         Debug.Log("GuidePush");
+
+        quitBt.SetActive(false);
 
         battenMark.SetActive(true);
 
@@ -103,6 +114,8 @@ public class TitleBt : MonoBehaviour
 
     public void DestroyBt()
     {
+        quitBt.SetActive(true);
+
         battenMark.SetActive(false);
 
         Destroy(nowInstance);
