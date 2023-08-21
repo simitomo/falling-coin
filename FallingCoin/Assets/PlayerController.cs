@@ -138,6 +138,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("underFloor"))
         {
+            score.SetScore();
+
             time.TimeSet();
 
             scene.LoadMap();

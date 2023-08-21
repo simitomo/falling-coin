@@ -26,8 +26,7 @@ public class Score : MonoBehaviour
         score = PlayerPrefs.GetInt("Score", 0);
     }
 
-    // オブジェクト終了時に動作
-    void OnDestroy()
+    public void SetScore()
     {
         // スコアの値をScoreというデータに保存
         PlayerPrefs.SetInt("Score", score);
