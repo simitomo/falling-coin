@@ -19,6 +19,13 @@ public class PlayerController : MonoBehaviour
     LoadScene scene;
     TimeDirector time;
 
+    // 点滅用
+    SpriteRenderer sprite;
+    bool isFlash = false;
+    float flashAlpha = 1.0f;
+    int flashFrame = 0;
+    Color c = new Color(1, 1, 1);
+
     // マウスを押した地点の座標を入れる変数
     Vector2 startPos = new Vector2();
 
@@ -51,6 +58,8 @@ public class PlayerController : MonoBehaviour
         // シーンのロード用
         scene = GetComponent<LoadScene>();
         time = GameObject.Find("Timer").GetComponent<TimeDirector>();
+        // 点滅用
+        sprite = GetComponent<SpriteRenderer>();
         // Rigidbody2Dの機能(AddForce)を使えるように参照する
         this.rigid = GetComponent<Rigidbody2D>();
         // PlayerBuffのスクリプトを参照できるようにする
@@ -132,6 +141,27 @@ public class PlayerController : MonoBehaviour
                 // パーティクル停止
                 par.Stop();
         }
+
+        if (isFlash)
+        {
+            flashFrame++;
+
+            if (flashFrame % 10 == 0)
+            {
+                if (flashAlpha == 1.0f) flashAlpha = 0.0f;
+                else                    flashAlpha = 1.0f;
+            }
+
+            if (50 <= flashFrame)
+            {
+                isFlash = false;
+                flashAlpha = 1.0f;
+            }
+
+            c.a = flashAlpha;
+
+            sprite.color = c;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -153,8 +183,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             // プレイヤーに無敵がついていない場合
+            // プレイヤーを点滅
+            // 速度ダウン、スコアダウン
             if (buff.isPlayerInvincible())
             {
+                isFlash = true;
+                flashFrame = 0;
+
                 this.rigid.velocity = new Vector2(this.rigid.velocity.x / 16, this.rigid.velocity.y / 32);
                 score.ScoreDonw();
             }
