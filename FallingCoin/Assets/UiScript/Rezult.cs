@@ -7,8 +7,13 @@ public class Rezult : MonoBehaviour
 {
     int score;
     int maxScore;
+    const int kClearScore = 1000;
     Text scorePointTxt;
     public GameObject canvas;
+    int time;
+    // 秒×50
+    const int kMinTime = 6000;      // 現在２分
+    const int kMaxTime = 15000;     // 現在５分
 
     public GameObject scoreRankS;
     public GameObject scoreRankA;
@@ -32,6 +37,38 @@ public class Rezult : MonoBehaviour
         // スコアを代入
         score = PlayerPrefs.GetInt("Score");
         maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        // タイムを代入
+        time = PlayerPrefs.GetInt("Time");
+
+        score += kClearScore;
+
+        if (time < kMinTime)
+        {
+            score = (int)(score * 1.5);
+        }
+        else if (kMaxTime < time)
+        {
+            score = (int)(score * (1 + ((kMaxTime - time) / kMaxTime) ) );
+        }
+
+        // スコアランク表記
+        if (score >= 2000)
+        {
+            rankInstance = Instantiate(scoreRankS);
+        }
+        else if (score >= 1700)
+        {
+            rankInstance = Instantiate(scoreRankA);
+        }
+        else if (score >= 1300)
+        {
+            rankInstance = Instantiate(scoreRankB);
+        }
+        else
+        {
+            rankInstance = Instantiate(scoreRankC);
+        }
+        rankInstance.transform.SetParent(canvas.transform, false);
 
         // 最高スコアの変更
         if (maxScore < score)
@@ -44,25 +81,6 @@ public class Rezult : MonoBehaviour
 
         // スコア表記
         scorePointTxt.text = "MaxScore : " + maxScore.ToString() + "\nScore : " + score.ToString();
-
-        // スコアランク表記
-        if (score >= 100)
-        {
-            rankInstance = Instantiate(scoreRankS);
-        }
-        else if (score >= 80)
-        {
-            rankInstance = Instantiate(scoreRankA);
-        }
-        else if (score >= 60)
-        {
-            rankInstance = Instantiate(scoreRankB);
-        }
-        else
-        {
-            rankInstance = Instantiate(scoreRankC);
-        }
-        rankInstance.transform.SetParent(canvas.transform, false);
 
         // スコアの初期化
         PlayerPrefs.SetInt("Score", 0);
