@@ -161,6 +161,10 @@ public class TitleBt : MonoBehaviour
         imgInstance.transform.SetParent(canvas.transform, false);
         yesBt.SetActive(true);
         noBt.SetActive(true);
+
+        startBt.SetActive(false);
+        guideBt.SetActive(false);
+        quitBt.SetActive(false);
     }
 
     public void YesBt()
@@ -179,5 +183,9 @@ public class TitleBt : MonoBehaviour
         Destroy(imgInstance);
         yesBt.SetActive(false);
         noBt.SetActive(false);
+
+        startBt.SetActive(true);
+        guideBt.SetActive(true);
+        quitBt.SetActive(true);
     }
 }

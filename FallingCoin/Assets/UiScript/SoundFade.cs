@@ -13,7 +13,7 @@ public class SoundFade : MonoBehaviour
     bool isFadeIn = true;
 
     float screenFade = 1.0f;
-    float kScreenFadeOut = 4f;
+    float kScreenFadeOut = 3f;
     public GameObject fade;
     Image fadeImg;
     RectTransform rectPos;
