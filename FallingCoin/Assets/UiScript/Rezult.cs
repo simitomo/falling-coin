@@ -52,15 +52,15 @@ public class Rezult : MonoBehaviour
         }
 
         // スコアランク表記
-        if (score >= 2000)
+        if (score >= 4000)
         {
             rankInstance = Instantiate(scoreRankS);
         }
-        else if (score >= 1700)
+        else if (score >= 3000)
         {
             rankInstance = Instantiate(scoreRankA);
         }
-        else if (score >= 1300)
+        else if (score >= 2000)
         {
             rankInstance = Instantiate(scoreRankB);
         }
