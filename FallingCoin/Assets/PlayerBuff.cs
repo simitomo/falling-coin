@@ -113,6 +113,8 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             speedupTurn = kSpeedupTurnMax;
 
+            if (speedUpInstance != null) Destroy(speedUpInstance);
+
             speedUpInstance = Instantiate(speedUp[speedupTurn - 1]);
             speedUpInstance.transform.SetParent(canvas.transform, false);
 
@@ -130,6 +132,8 @@ public class PlayerBuff : MonoBehaviour
         {
             // ターンの増加
             invincibleUseNum = kInvincibleUseNumMax;
+
+            if (invincibleInstance != null) Destroy(invincibleInstance);
 
             invincibleInstance = Instantiate(invincible[invincibleUseNum - 1]);
             invincibleInstance.transform.SetParent(canvas.transform, false);
