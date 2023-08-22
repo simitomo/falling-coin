@@ -8,6 +8,7 @@ public class TitleBt : MonoBehaviour
     // スタートに使う変数
     bool isStart = false;
 
+    public AudioClip StartBgm;
 
     public GameObject startBt;
     public GameObject guideBt;
@@ -52,7 +53,7 @@ public class TitleBt : MonoBehaviour
     {
         if (isStart)
         {
-            alpha -= 0.02f;
+            alpha -= 0.0229375f;
 
             if (alpha <= 0.0f)
             {
@@ -88,6 +89,8 @@ public class TitleBt : MonoBehaviour
         //string mapString = "map" + (Random.Range(0, 3)+1).ToString() + "-1";
 
         //SceneManager.LoadScene("map1-1");
+
+        aud.PlayOneShot(this.StartBgm);
 
         isStart = true;
         this.countDown.SetActive(true);

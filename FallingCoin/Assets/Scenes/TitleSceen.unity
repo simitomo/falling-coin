@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccccf7a6ffe85740a407dc404791ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartBgm: {fileID: 8300000, guid: 264dac58202d8b54290994152d118431, type: 3}
   startBt: {fileID: 1424109456}
   guideBt: {fileID: 575467121}
   quitBt: {fileID: 1747100880}
@@ -910,7 +911,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -11,6 +11,8 @@ public class PlayerBuff : MonoBehaviour
 
     AudioSource aud;
     [SerializeField] private AudioClip[] clips;
+    public AudioClip getSpeedUpSe;
+    public AudioClip getGaurdSe;
 
     int audioNo = 0;
     float alphaBgm = 1.0f;
@@ -113,6 +115,8 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             speedupTurn = kSpeedupTurnMax;
 
+            this.aud.PlayOneShot(this.getSpeedUpSe);
+
             if (speedUpInstance != null) Destroy(speedUpInstance);
 
             speedUpInstance = Instantiate(speedUp[speedupTurn - 1]);
@@ -133,6 +137,7 @@ public class PlayerBuff : MonoBehaviour
             // ターンの増加
             invincibleUseNum = kInvincibleUseNumMax;
 
+            this.aud.PlayOneShot(this.getGaurdSe);
             if (invincibleInstance != null) Destroy(invincibleInstance);
 
             invincibleInstance = Instantiate(invincible[invincibleUseNum - 1]);
