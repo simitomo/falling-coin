@@ -7,14 +7,14 @@ public class Rezult : MonoBehaviour
 {
     int score;
     int maxScore;
-    int clearScore = 1000;
+    int clearScore = 2000;
     Text scorePointTxt;
     public GameObject canvas;
     int time;
     // 秒×50
-    const int kMinTime = 4500;      // 現在1分30
+    const int kMinTime = 4000;     // 現在1分20
     const int kMaxTime = 9000;     // 現在3分
-    float magnNum = 1.5f;
+    float magnNum = 2f;
 
     public GameObject scoreRankS;
     public GameObject scoreRankA;
@@ -44,7 +44,7 @@ public class Rezult : MonoBehaviour
         if (kMinTime < time && time <= kMaxTime)
         {
             Debug.Log("[magnification] calsulation");
-            magnNum = 1 + ((kMaxTime - time) / (float)kMaxTime);
+            magnNum = 1 + ( (kMaxTime - time) / (float)(kMaxTime - kMinTime) );
         }
         else if (kMaxTime < time)
         {
