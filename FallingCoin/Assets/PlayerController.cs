@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip coinSnapSE;
     public AudioClip windoNoiseSE;
     public AudioClip HitSe;
+    public AudioClip GuardSE;
 
     // パーティクル用
     ParticleSystem par;
@@ -195,6 +196,10 @@ public class PlayerController : MonoBehaviour
                 score.ScoreDonw();
 
                 this.aud.PlayOneShot(this.HitSe);
+            }
+            else
+            {
+                this.aud.PlayOneShot(this.GuardSE);
             }
 
             // 触れた敵を消す

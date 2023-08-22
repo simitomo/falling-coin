@@ -41,4 +41,18 @@ public class TimeDirector : MonoBehaviour
 
         Debug.Log("[Time]End : " + frameCount);
     }
+
+    void Update()
+    {
+#if UNITY_EDITOR
+        //デバック用コード
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKey(KeyCode.T))
+            {
+                frameCount++;
+            }
+        }
+#endif
+    }
 }

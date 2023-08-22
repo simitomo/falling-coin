@@ -14,6 +14,7 @@ public class Rezult : MonoBehaviour
     // 秒×50
     const int kMinTime = 4500;      // 現在1分30
     const int kMaxTime = 9000;     // 現在3分
+    float magnNum = 1.5f;
 
     public GameObject scoreRankS;
     public GameObject scoreRankA;
@@ -40,14 +41,23 @@ public class Rezult : MonoBehaviour
         // タイムを代入
         time = PlayerPrefs.GetInt("Time");
 
-        if (time < kMinTime)
+        if (kMinTime < time && time <= kMaxTime)
         {
-            score += (int)(clearScore * 1.5);
+            Debug.Log("[magnification] calsulation");
+            magnNum = 1 + ((kMaxTime - time) / (float)kMaxTime);
         }
         else if (kMaxTime < time)
         {
-            score += (int)(clearScore * (1 + ((kMaxTime - time) / kMaxTime) ) );
+            Debug.Log("[magnification] calsulation = 1");
+            magnNum = 1;
         }
+
+        Debug.Log("[magnification]" + magnNum);
+        Debug.Log("[frameCount]" + time);
+
+        clearScore = (int)(clearScore * magnNum);
+
+        score += clearScore;
 
         // スコアランク表記
         if (score >= 5500)
