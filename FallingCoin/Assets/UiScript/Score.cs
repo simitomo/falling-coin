@@ -43,7 +43,7 @@ public class Score : MonoBehaviour
     {
         downScore = score / 4;
         if (500 < downScore)
-            downScore = 200;
+            downScore = 500;
 
         score -= downScore;
     }
