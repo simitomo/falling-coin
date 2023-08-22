@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip windoNoiseSE;
     public AudioClip HitSe;
     public AudioClip GuardSE;
+    public AudioClip getGemSe;
 
     // パーティクル用
     ParticleSystem par;
@@ -210,6 +211,8 @@ public class PlayerController : MonoBehaviour
         {
             // スコアをアップする
             score.ScoreUp();
+
+            this.aud.PlayOneShot(this.getGemSe);
 
             // 触れたアイテムを消す
             Destroy(collision.gameObject);
