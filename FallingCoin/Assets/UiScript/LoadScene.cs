@@ -9,12 +9,25 @@ public class LoadScene : MonoBehaviour
     public bool isRezult = false;
     public string materialNum;
 
+    int sceneNo;
+    bool isLoadNo = true;
+
     void Start()
     {
         if (!isRezult)
         {
+            while(isLoadNo)
+            {
+                sceneNo = (Random.Range(0, 3) + 1);
+                if (sceneNo != PlayerPrefs.GetInt("SceneNo", 0))
+                {
+                    isLoadNo = false;
+                    PlayerPrefs.SetInt("SceneNo", sceneNo);
+                }
+            }
+
             // マップのロード名
-            sceneName = "Map" + (Random.Range(0, 3) + 1).ToString() + "-" + materialNum;
+            sceneName = "Map" + sceneNo.ToString() + "-" + materialNum;
         }
         else
         {
