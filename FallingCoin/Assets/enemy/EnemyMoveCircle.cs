@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyMoveCircle : MonoBehaviour
 {
-    // 円の半径を設定します
-    const float kRadius = 0.1f;
+    // 円の半径を設定
+    const float kRadius = 0.125f;
 
     float xPos;
     float yPos;
+
+    float phase;
 
     // 初期位置を取得し、高さを保持する
     Vector2 initPos;
@@ -21,12 +23,12 @@ public class EnemyMoveCircle : MonoBehaviour
 
     void FixedUpdate()
     {
+        // オブジェクトの位置を計算する
         initPos.x += xPos;
         initPos.y += yPos;
-        // オブジェクトの位置を計算する
 
         // 位相を計算する
-        float phase = Time.time * Mathf.PI;
+        phase = Time.time * Mathf.PI * 0.5f;
 
         // 現在の位置を計算する
         xPos = kRadius * Mathf.Cos(phase);
