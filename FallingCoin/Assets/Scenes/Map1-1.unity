@@ -94959,6 +94959,8 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 4565f57c668bfb0428189f735062156c, type: 3}
   - {fileID: 8300000, guid: d814efa05b5432042a9d33711bbdc7f9, type: 3}
+  getSpeedUpSe: {fileID: 8300000, guid: 45633423bc6cd6f40a0c5e9530f3c013, type: 3}
+  getGaurdSe: {fileID: 8300000, guid: 008dd209627c03f44b6a1af1c9d5c523, type: 3}
   speedUp:
   - {fileID: 2452275427343761395, guid: 5cb4a6ceeadccc948a034f787ddbab5c, type: 3}
   - {fileID: 3436851091150572147, guid: f0df11d5325d5f645a82174b212de903, type: 3}
@@ -95020,6 +95022,7 @@ MonoBehaviour:
   windoNoiseSE: {fileID: 8300000, guid: f1a08981862c0fa48a19e894a1e0e7c3, type: 3}
   HitSe: {fileID: 8300000, guid: 28fefd283fc81654eaeeadf33322338b, type: 3}
   GuardSE: {fileID: 8300000, guid: 0f4a5c8cf9cea674e8f4eff8c4fc723a, type: 3}
+  getGemSe: {fileID: 8300000, guid: a61cbd2adc0514d4aa365b171af34353, type: 3}
 --- !u!212 &1988964788
 SpriteRenderer:
   m_ObjectHideFlags: 0
