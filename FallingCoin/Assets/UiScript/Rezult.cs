@@ -60,15 +60,15 @@ public class Rezult : MonoBehaviour
         score += clearScore;
 
         // スコアランク表記
-        if (score >= 5500)
+        if (score >= 7000)
         {
             rankInstance = Instantiate(scoreRankS);
         }
-        else if (score >= 4000)
+        else if (score >= 5500)
         {
             rankInstance = Instantiate(scoreRankA);
         }
-        else if (score >= 2000)
+        else if (score >= 3500)
         {
             rankInstance = Instantiate(scoreRankB);
         }
