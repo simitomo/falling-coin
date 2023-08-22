@@ -96828,6 +96828,7 @@ MonoBehaviour:
   coinSnapSE: {fileID: 8300000, guid: 92e0b6cb7576e744099c126c76f69244, type: 3}
   windoNoiseSE: {fileID: 8300000, guid: f1a08981862c0fa48a19e894a1e0e7c3, type: 3}
   HitSe: {fileID: 8300000, guid: 28fefd283fc81654eaeeadf33322338b, type: 3}
+  GuardSE: {fileID: 8300000, guid: 0f4a5c8cf9cea674e8f4eff8c4fc723a, type: 3}
 --- !u!212 &1387993963
 SpriteRenderer:
   m_ObjectHideFlags: 0
